@@ -1,1 +1,0 @@
-pickles --feature-directory="cypress/integration" --output-directory="specification" --system-under-test-name=shopozor-management-frontend --system-under-test-version=0.0.0 --language=fr --documentation-format=dhtml
