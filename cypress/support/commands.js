@@ -28,12 +28,12 @@ import { responseStub } from './stubHelpers'
 
 const isGraphQL = (path, method) => path.includes('/graphql/') && method === 'POST'
 
-Cypress.Commands.add('fakeGraphqlResponse', response => {
+Cypress.Commands.add('fakeGraphqlResponse', (response, isFake = Cypress.env('fakeGraphql')) => {
   cy.on('window:before:load', (win) => {
     const originalFunction = win.fetch
 
     function fetch (path, { body, method }) {
-      if (Cypress.env('fakeGraphql') && isGraphQL(path, method)) {
+      if (isFake && isGraphQL(path, method)) {
         return responseStub(response)
       }
       return originalFunction.apply(this, arguments)
