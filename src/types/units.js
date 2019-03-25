@@ -1,4 +1,4 @@
-import { unitsDefinitions } from '../../../src/components/Units/UnitsDefinitions'
+import { unitsDefinitions } from './UnitsDefinitions'
 
 // export const mass = {
 //   GR: 'gr',
