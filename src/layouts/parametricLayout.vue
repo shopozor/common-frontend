@@ -11,22 +11,27 @@
           round
           @click="drawerOpen = !drawerOpen"
           aria-label="Menu"
-          :disable="!isAuthorized"
+          :disable="disableNavigation"
         >
           <q-icon name="menu" />
         </q-btn>
 
         <q-toolbar-title>
-          {{$t('shop')}} - {{$t('management')}}
+          {{$t('shop')}} - {{$t(subtitle)}}
         </q-toolbar-title>
         <language-select />
-        <q-btn icon="cancel" size="sm" label="clear server" color="negative" @click="clear" class="no-shadow" />
       </q-toolbar>
     </q-layout-header>
     <q-layout-drawer
         v-model="drawerOpen"
         :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null">
-      <side-drawer-content />
+      <side-drawer-content
+        :email="email"
+        :drawerOpen="drawerOpen"
+        :orderedLinks="orderedLinks"
+        :accessRules="accessRules"
+        :permissions="permissions"
+      />
     </q-layout-drawer>
     <q-page-container>
       <router-view />
@@ -35,7 +40,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import SideDrawerContent from '../components/SideDrawerContent/SideDrawerContent'
 import LanguageSelect from '../components/I18n/LanguageSelect'
 
@@ -43,25 +47,36 @@ export default {
   name: 'Layout',
   data () {
     return {
-      drawerOpen: this.$q.platform.is.desktop
+      drawerOpen: this.$q.platform.is.desktop && !this.disableNavigation
     }
   },
-  components: {SideDrawerContent, LanguageSelect},
-  computed: {
-    ...mapGetters(['isAuthorized'])
-  },
-  methods: {
-    clear () {
-      window.localStorage.clear()
-      this.$router.push('/')
-      setTimeout(() => {
-        window.location.reload()
-      }, 1000)
+  props: {
+    email: {
+      type: String,
+      required: true
+    },
+    subtitle: {
+      type: String,
+      required: true
+    },
+    disableNavigation: {
+      type: Boolean,
+      default: false
+    },
+    orderedLinks: {
+      type: Object,
+      required: true
+    },
+    accessRules: {
+      type: Object,
+      required: true
+    },
+    permissions: {
+      type: Array,
+      required: true
     }
   },
-  created () {
-    this.drawerOpen = this.drawerOpen && this.isAuthorized
-  }
+  components: { SideDrawerContent, LanguageSelect }
 }
 </script>
 

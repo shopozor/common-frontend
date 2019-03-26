@@ -8,75 +8,87 @@
     {{ user }}
   </q-list-header>
     <page-link
-      v-for="value in userManagementLinks"
-      :key="pages[value].path"
-      :path="pages[value].path"
-      :label="value" />
+      v-for="link in userManagementLinks"
+      :key="userManagementPathes[link]"
+      :path="userManagementPathes[link]"
+      :label="link" />
     <q-item-separator />
     <page-link
-      v-for="value in navigationLinks"
-      :key="pages[value].path"
-      :path="pages[value].path"
-      :label="value" />
+      v-for="link in navigationLinks"
+      :key="navigationPathes[link]"
+      :path="navigationPathes[link]"
+      :label="link" />
   </q-list>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-import access from '../../../../src/router/access'
-import pages from '../../../../src/router/pages'
 import types from '../../types'
+import { filterAccessibleLinks, generatePath } from '../../router/helpers'
 import PageLink from './PageLink'
 
 export default {
   name: 'SideDrawerContent',
   data () {
     return {
-      pages,
       separator: types.links.SEPARATOR,
-      labels: types.links,
-      orderedLinks: {
-        userManagement: [
-          types.links.SIGNUP,
-          types.links.LOGIN,
-          types.links.PROFILE,
-          types.links.LOGOUT
-        ],
-        navigation: [
-          types.links.HOME,
-          types.links.FAKE_SHOP,
-          types.links.MAP,
-          types.links.CALENDAR,
-          types.links.ORDERS,
-          types.links.PRODUCTS,
-          types.links.MY_SHOP,
-          types.links.MANAGE_SHOPS,
-          types.links.MANAGE_SITE
-        ]
-      }
+      labels: types.links
     }
   },
-  props: { drawerOpen: Boolean },
+  props: {
+    email: {
+      type: String,
+      required: true
+    },
+    drawerOpen: {
+      type: Boolean,
+      required: true
+    },
+    orderedLinks: {
+      type: Object,
+      required: true
+    },
+    accessRules: {
+      type: Object,
+      required: true
+    },
+    permissions: {
+      type: Array,
+      required: true
+    }
+  },
   computed: {
-    ...mapGetters(['email', 'permissions', 'isAuthorized']),
-    userManagementLinks: function () {
-      return this.filterAccessibleLinks(this.orderedLinks.userManagement)
+    user () {
+      const isConnected = this.permissions.every(permission => permission !== types.permissions.NOT_CONNECTED)
+      if (isConnected) return this.email
+      else return this.$t('layout.notConnected')
+    },
+    userManagementLinks () {
+      return filterAccessibleLinks({
+        links: this.orderedLinks.userManagement,
+        accessRules: this.accessRules,
+        permissions: this.permissions
+      })
     },
     navigationLinks () {
-      return this.filterAccessibleLinks(this.orderedLinks.navigation)
+      return filterAccessibleLinks({
+        links: this.orderedLinks.navigation,
+        accessRules: this.accessRules,
+        permissions: this.permissions
+      })
     },
-    user () {
-      if (this.isAuthorized) return this.email
-      else return this.$t('layout.notConnected')
+    userManagementPathes () {
+      return this.generatePathes(this.userManagementLinks)
+    },
+    navigationPathes () {
+      return this.generatePathes(this.navigationLinks)
     }
   },
   methods: {
-    filterAccessibleLinks (filterKeys) {
-      const accessList = access(this.permissions)
-      const accessibleLinks = filterKeys.filter(key => {
-        return accessList[key]
-      })
-      return accessibleLinks
+    generatePathes (links) {
+      return links.reduce((path, link) => {
+        path[link] = generatePath({ link })
+        return path
+      }, {})
     }
   },
   components: {
