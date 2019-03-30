@@ -9,62 +9,52 @@ import types from '../types'
  *     write its name in router/links.js > orderedLinks
  **/
 
-const verify = ({ link, accessRules, permissions }) => {
-  const linkIsHome = link === '/'
-  const linkIsAccessible = permissions.some(permission => accessRules[permission][link])
-  return linkIsHome || linkIsAccessible
+export const generatePath = ({ link }) => {
+  if (link === types.links.HOME) return '/'
+  else return `/${link}`
+}
+
+const checkIfLinkIsAccessible = ({ link, accessRules, permissions }) => {
+  return permissions.some(permission => {
+    const validity = accessRules[permission][link]
+    return validity
+  })
 }
 
 const firstUpperCase = string => string.charAt(0).toUpperCase() + string.slice(1)
 
-export const generatePath = ({ link }) => {
-  if (link === types.HOME) return '/'
-  else return `/${link}`
-}
-
-const generateBeforeEnter = ({ link, accessRules, permissions }) => {
-  return (to, from, next) => {
-    if (verify({ link, accessRules, permissions })) next()
-    else next(from)
-  }
+const generatePermissions = ({ link, accessRules }) => {
+  return Object.keys(accessRules).reduce((permissions, permission) => {
+    if (accessRules[permission][link]) permissions.push(permission)
+    return permissions
+  }, [])
 }
 
 const generatePage = ({ link, accessRules, permissions }) => {
   return {
+    name: link,
     path: generatePath({ link }),
     component: () => import(`pages/${firstUpperCase(link)}.vue`),
-    beforeEnter: generateBeforeEnter({ link, accessRules, permissions })
+    meta: { permissions: generatePermissions({ link, accessRules }) }
+    // beforeEnter: generateBeforeEnter({ link, accessRules, permissions })
   }
 }
 
 const generatePages = ({ links, accessRules, permissions }) => {
-  return links.reduce((pages, link) => {
-    pages[link] = generatePage({ link, accessRules, permissions })
-    return pages
-  }, {})
-}
-
-const generateLinks = ({ links, accessRules, permissions }) => {
-  const pages = generatePages({ links, accessRules, permissions })
-  return Object.keys(pages).map(key => {
-    return {
-      path: pages[key].path,
-      component: pages[key].component,
-      beforeEnter: pages[key].beforeEnter
-    }
-  })
+  return links.map(link => generatePage({ link, accessRules, permissions }))
 }
 
 export const filterAccessibleLinks = ({ links, accessRules, permissions }) => {
-  return links.filter(link => verify({ link, accessRules, permissions }))
+  return links.filter(link => checkIfLinkIsAccessible({ link, accessRules, permissions }))
 }
 
 export const generateRoutes = ({ links, accessRules, permissions }) => {
+  const pages = generatePages({ links, accessRules, permissions })
   const routes = [
     {
       path: '/',
       component: () => import('layouts/layout.vue'),
-      children: generateLinks({ links, accessRules, permissions })
+      children: pages
     }
   ]
 
@@ -77,4 +67,19 @@ export const generateRoutes = ({ links, accessRules, permissions }) => {
   }
 
   return routes
+}
+
+const checkIfOneMatch = (array1, array2) => {
+  return array1.some(el1 => {
+    return array2.some(el2 => {
+      return el1 === el2
+    })
+  })
+}
+
+export const checkIfUserCanAccess = ({ to, permissions }) => {
+  const pagePermissions = to.meta.permissions
+  const pageExists = pagePermissions !== undefined
+  if (pageExists) return checkIfOneMatch(pagePermissions, permissions)
+  else return false
 }
