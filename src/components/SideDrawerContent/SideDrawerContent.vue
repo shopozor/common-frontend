@@ -63,7 +63,6 @@ export default {
       else return this.$t('layout.notConnected')
     },
     userManagementLinks () {
-      console.log(this.permissions)
       return filterAccessibleLinks({
         links: this.orderedLinks.userManagement,
         accessRules: this.accessRules,

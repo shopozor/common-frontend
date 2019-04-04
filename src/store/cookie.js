@@ -28,5 +28,4 @@ export const get = ({ cookieId }) => {
 
 export const del = ({ cookieId }) => {
   set({ cookieId, cookieValue: '', cookieDuration: -1 })
-  console.log('cookie deleted')
 }
