@@ -23,7 +23,7 @@
 
 <script>
 import types from '../../types'
-import { filterAccessibleLinks, generatePath } from '../../router/helpers'
+import { filterAccessibleLinks, generatePath } from '../../router/Helpers'
 import PageLink from './PageLink'
 
 export default {
@@ -63,6 +63,7 @@ export default {
       else return this.$t('layout.notConnected')
     },
     userManagementLinks () {
+      console.log(this.permissions)
       return filterAccessibleLinks({
         links: this.orderedLinks.userManagement,
         accessRules: this.accessRules,

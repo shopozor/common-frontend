@@ -1,4 +1,6 @@
 import types from '../types'
+// import { firstUpperCase, atLeastOneMatch } from '../Helpers.js'
+import { atLeastOneMatch } from '../Helpers.js'
 
 /**
  * To add a new page:
@@ -20,8 +22,6 @@ const checkIfLinkIsAccessible = ({ link, accessRules, permissions }) => {
     return validity
   })
 }
-
-const firstUpperCase = string => string.charAt(0).toUpperCase() + string.slice(1)
 
 const generatePermissions = ({ link, accessRules }) => {
   return Object.keys(accessRules).reduce((permissions, permission) => {
@@ -69,17 +69,12 @@ export const generateRoutes = ({ links, accessRules, permissions }) => {
   return routes
 }
 
-const checkIfOneMatch = (array1, array2) => {
-  return array1.some(el1 => {
-    return array2.some(el2 => {
-      return el1 === el2
-    })
-  })
-}
-
 export const checkIfUserCanAccess = ({ to, permissions }) => {
   const pagePermissions = to.meta.permissions
   const pageExists = pagePermissions !== undefined
-  if (pageExists) return checkIfOneMatch(pagePermissions, permissions)
+  if (pageExists) return atLeastOneMatch(pagePermissions, permissions)
   else return false
 }
+
+// BUG: webpack n'arrive pas à importer firstUpperCase, alors que atLeastOneMatch fonctionne
+export const firstUpperCase = string => string.charAt(0).toUpperCase() + string.slice(1)

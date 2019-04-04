@@ -1,5 +1,6 @@
 <template>
     <q-item
+      :id="`pageLink->${label}`"
       :class="{'bg-primary text-white': actualPath === path}"
       v-if="label !== undefined"
       @click.native="() => $router.push({path})">
