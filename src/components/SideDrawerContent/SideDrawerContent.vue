@@ -4,15 +4,15 @@
     link
     inset-delimiter
   >
-  <q-list-header>
+  <q-item-label header>
     {{ user }}
-  </q-list-header>
+  </q-item-label>
     <page-link
       v-for="link in userManagementLinks"
       :key="userManagementPathes[link]"
       :path="userManagementPathes[link]"
       :label="link" />
-    <q-item-separator />
+    <q-separator />
     <page-link
       v-for="link in navigationLinks"
       :key="navigationPathes[link]"

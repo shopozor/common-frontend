@@ -3,8 +3,9 @@
       :id="`pageLink->${label}`"
       :class="{'bg-primary text-white': actualPath === path}"
       v-if="label !== undefined"
-      @click.native="() => $router.push({path})">
-        <q-item-main :label="$t(`links.${label}`)" />
+      clickable
+      @click="() => $router.push({path})">
+        <q-item-section>{{ $t(`links.${label}`) }}</q-item-section>
     </q-item>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <q-layout view="HHH Lpr lFf">
-    <q-layout-header>
+    <q-header>
       <q-toolbar
         color="primary"
       >
@@ -21,8 +21,8 @@
         </q-toolbar-title>
         <language-select />
       </q-toolbar>
-    </q-layout-header>
-    <q-layout-drawer
+    </q-header>
+    <q-drawer
         v-model="drawerOpen"
         :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null">
       <side-drawer-content
@@ -32,7 +32,7 @@
         :accessRules="accessRules"
         :permissions="permissions"
       />
-    </q-layout-drawer>
+    </q-drawer>
     <q-page-container>
       <router-view />
     </q-page-container>
