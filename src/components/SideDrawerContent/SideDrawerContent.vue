@@ -12,7 +12,7 @@
       :key="userManagementPathes[link]"
       :path="userManagementPathes[link]"
       :label="link" />
-    <q-separator />
+    <q-separator color="grey-5" inset />
     <page-link
       v-for="link in navigationLinks"
       :key="navigationPathes[link]"

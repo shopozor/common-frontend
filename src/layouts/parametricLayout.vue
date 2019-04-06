@@ -25,7 +25,7 @@
     <q-drawer
       id="sideDrawer"
       v-model="drawerOpen"
-      :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null">
+      content-class="bg-grey-3">
       <side-drawer-content
         :email="email"
         :drawerOpen="drawerOpen"
