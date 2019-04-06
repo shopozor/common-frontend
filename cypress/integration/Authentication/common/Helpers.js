@@ -20,8 +20,7 @@ export function login (persona) {
     .then(user => {
       cy.get('input[type=email]').clear().type(user.email)
       cy.get('input[type=password]').clear().type(user.password)
-      cy.get('button[type=button]')
-        .contains('se connecter')
+      cy.get('[id="loginButton"]')
         .click()
       // TODO: instead of the above code, we need something like
       // // TODO: I will probably need to import the action directly and provide it with the commit method
@@ -42,8 +41,7 @@ export function login (persona) {
 export function connectWithUserCredentialsViaGui (email, password) {
   cy.get('input[type=email]').clear().type(email)
   cy.get('input[type=password]').clear().type(password)
-  cy.get('button[type=button]')
-    .contains('se connecter')
+  cy.get('button[id="loginButton"]')
     .click()
 }
 
@@ -53,7 +51,7 @@ export function getTokenDuration (token) {
 }
 
 function openSideDrawer () {
-  cy.get('.q-layout-drawer').then(drawer => {
+  cy.get('[id=sideDrawer]').then(drawer => {
     const transform = drawer[0].style.transform
     const sideDrawerIsVisible = transform.includes('(0px)')
     if (!sideDrawerIsVisible) {

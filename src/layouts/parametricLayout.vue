@@ -23,8 +23,9 @@
       </q-toolbar>
     </q-header>
     <q-drawer
-        v-model="drawerOpen"
-        :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null">
+      id="sideDrawer"
+      v-model="drawerOpen"
+      :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null">
       <side-drawer-content
         :email="email"
         :drawerOpen="drawerOpen"
