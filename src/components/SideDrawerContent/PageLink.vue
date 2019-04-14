@@ -1,11 +1,11 @@
 <template>
     <q-item
       :id="`pageLink->${label}`"
-      :class="{'bg-primary text-white': actualPath === path}"
+      :class="{'bg-primary text-white': isActive}"
       v-if="label !== undefined"
       clickable
       @click="() => $router.push({path})">
-        <q-item-section>{{ $t(`links.${label}`) }}</q-item-section>
+        <q-item-section>{{ '$t(`links.${label}`)' }}</q-item-section>
     </q-item>
 </template>
 
@@ -17,8 +17,8 @@ export default {
     label: String
   },
   computed: {
-    actualPath () {
-      return this.$route.path
+    isActive () {
+      return this.$route.path === this.path
     }
   }
 }
