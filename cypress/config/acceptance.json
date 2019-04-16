@@ -15,6 +15,6 @@
     "toConsole": true
   },
   "videoUploadOnPasses": false,
-  "video": false,
+  "video": true,
   "projectId": "g6v5sw"
 }
