@@ -7,7 +7,7 @@ function getConfigurationByFile (file) {
   return fs.readJson(pathToConfigFile)
 }
 
-export function getConfiguration (config) {
+exports.getConfiguration = function (config) {
   const file = config.env.configFile || 'development'
   return getConfigurationByFile(file)
 }
