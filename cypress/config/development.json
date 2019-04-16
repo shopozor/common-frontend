@@ -1,0 +1,15 @@
+{
+  "baseUrl": "http://localhost:4000/#",
+  "ignoreTestFiles": [
+    "*.js",
+    "*.gif"
+  ],
+  "env": {
+    "fakeGraphql": true,
+    "timeoutInMs": 1000,
+    "timeDeltaInMs": 10
+  },
+  "videoUploadOnPasses": true,
+  "video": true,
+  "projectId": "g6v5sw"
+}
