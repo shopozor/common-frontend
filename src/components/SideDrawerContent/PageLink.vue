@@ -5,7 +5,7 @@
       v-if="label !== undefined"
       clickable
       @click="() => $router.push({path})">
-        <q-item-section>{{ '$t(`links.${label}`)' }}</q-item-section>
+        <q-item-section>{{ $t(`links.${label}`) }}</q-item-section>
     </q-item>
 </template>
 
