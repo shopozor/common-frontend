@@ -2,6 +2,7 @@ import types from '../../types'
 
 export default {
   shop: 'La Budzonnerie',
+  store: 'magasin',
   management: 'gestion',
   welcome: 'Bienvenue',
   dialog: {
@@ -50,19 +51,21 @@ export default {
     password: 'mot de passe'
   },
   signup: {
-    repeatPassword: 'répétez votre mot de passe',
     createAccount: 'Créer mon compte',
-    emailHelper: {
-      valid: 'ceci sera votre nom de budzon',
-      invalid: 'veillez entrer un e-mail valide'
+    email: {
+      label: 'e-mail',
+      hint: 'ceci sera votre nom de budzon',
+      error: 'veillez entrer un e-mail valide'
     },
-    passwordHelper: {
-      valid: '6 caractères ou plus',
-      invalid: 'il manque 1 caractère | il manque {count} caractères'
+    password: {
+      label: 'mot de passe',
+      hint: '6 caractères ou plus',
+      error: 'il manque 1 caractère | il manque {count} caractères'
     },
-    confirmPasswordHelper: {
-      valid: 'pour éviter les erreurs de frappe',
-      invalid: 'les deux mots de passe sont différents'
+    confirmPassword: {
+      label: 'répétez votre mot de passe',
+      hint: 'pour éviter les erreurs de frappe',
+      error: 'les deux mots de passe sont différents'
     },
     correctErrors: 'Veuillez corriger les erreurs.'
   },

@@ -1,4 +1,5 @@
 export const NOT_CONNECTED = 'NOT_CONNECTED'
+export const CUSTOMER = 'CUSTOMER'
 export const MANAGE_PRODUCTS = 'MANAGE_PRODUCTS'
 export const MANAGE_STAFF = 'MANAGE_STAFF'
 export const MANAGE_USERS = 'MANAGE_USERS'
