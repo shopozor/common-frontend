@@ -60,11 +60,22 @@ function openSideDrawer () {
   })
 }
 
+function getPageLink (label) {
+  return cy.get(`[id="pageLink->${label}"]`)
+}
+
 function clickOnPageLink (label) {
-  cy.get(`[id="pageLink->${label}"]`).click()
+  getPageLink(label).click()
 }
 
 export function navigateTo (label) {
   openSideDrawer()
   clickOnPageLink(label)
+}
+
+export function checkIfLinkIsActive (label) {
+  openSideDrawer()
+  getPageLink(label).then(
+    link => link[0].classList.value
+  ).should('include', 'isActive')
 }

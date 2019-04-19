@@ -1,7 +1,7 @@
 <template>
     <q-item
       :id="`pageLink->${label}`"
-      :class="{'bg-primary text-white': isActive}"
+      :class="{'bg-primary text-white': isActive, isActive}"
       v-if="label !== undefined"
       clickable
       @click="() => $router.push({path})">
