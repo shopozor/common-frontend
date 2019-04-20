@@ -67,6 +67,16 @@ export default {
       hint: 'pour éviter les erreurs de frappe',
       error: 'les deux mots de passe sont différents'
     },
+    cookiesPolicy: {
+      accept: 'J\'accepte l\'utilisation de cookies.',
+      explain: 'Nous utilisons des cookies pour faciliter votre navigation. Aucun cookie n\'est conservé si vous vous déconnectez.'
+    },
+    termsOfService: {
+      accept: 'accepter',
+      explain: 'expliquer'
+    },
+    creatingAccount: 'Veuillez patienter pendant que votre compte utilisateur est créé.',
+    emailSent: 'Un email avec un lien d\'activation vous a été transmis. Cliquez sur ce lien pour finaliser la création de votre compte.',
     correctErrors: 'Veuillez corriger les erreurs.'
   },
   login: {
