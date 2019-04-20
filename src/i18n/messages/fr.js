@@ -11,7 +11,8 @@ export default {
   actions: {
     ok: 'Valider',
     cancel: 'Annuler',
-    save: 'Enregistrer'
+    save: 'Enregistrer',
+    close: 'Fermer'
   },
   links: {
     [types.links.SIGNUP]: 'S\'inscrire',
@@ -55,7 +56,7 @@ export default {
     email: {
       label: 'e-mail',
       hint: 'ceci sera votre nom de budzon',
-      error: 'veillez entrer un e-mail valide'
+      error: 'veuillez entrer un e-mail valide'
     },
     password: {
       label: 'mot de passe',
@@ -69,11 +70,11 @@ export default {
     },
     cookiesPolicy: {
       accept: 'J\'accepte l\'utilisation de cookies.',
-      explain: 'Nous utilisons des cookies pour faciliter votre navigation. Aucun cookie n\'est conservé si vous vous déconnectez.'
+      explain: 'Nous utilisons des cookies uniquement pour faciliter votre navigation. Aucun cookie n\'est conservé après votre déconnection.'
     },
     termsOfService: {
-      accept: 'accepter',
-      explain: 'expliquer'
+      accept: 'J\'accepte les conditions d\'utilisation.',
+      explain: 'Les conditions d\'utilisations lient l\'utilisateur et le propriétaire de la plateforme de vente.'
     },
     creatingAccount: 'Veuillez patienter pendant que votre compte utilisateur est créé.',
     emailSent: 'Un email avec un lien d\'activation vous a été transmis. Cliquez sur ce lien pour finaliser la création de votre compte.',
