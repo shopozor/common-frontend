@@ -1,9 +1,14 @@
 CONTENT_TYPE="Content-Type: application/x-www-form-urlencoded; charset=UTF-8;"
 USER_AGENT="Mozilla/4.73 [en] (X11; U; Linux 2.2.15 i686)"
 
+getCommandResult() {
+  local command=$1
+  echo $(echo $command | jq '.result')
+}
+
 exitOnFail() {
   local command=$1
-  local result=$(echo $command | jq '.result')
+  local result=$(getCommandResult $command)
   if [[ "$result" != "0" ]] ; then
     echo "Following command failed with result $result: $command" >&2
     exit 1
