@@ -1,0 +1,70 @@
+jpsVersion: 1.3
+jpsType: install
+application:
+  id: management-frontend
+  name: Management frontend
+  version: 0.0
+  baseUrl: https://bitbucket.org/softozor/shopozor-common-frontend/raw/master/e2e/
+
+  globals:
+    NODEJS_HOME: /home/jelastic
+    NODEJS_CONTEXT: ROOT
+    NODEJS_PATH_TO_CONTEXT: ${globals.NODEJS_HOME}/${globals.NODEJS_CONTEXT}
+    NODEJS_PORT: 4000
+  
+  env:
+    topology:
+      nodes:
+        - nodeGroup: bl
+          nodeType: nginx-dockerized
+          displayName: Node balancing
+          count: 1
+          fixedCloudlets: 1
+          cloudlets: 4
+          env:
+            DOCKER_EXPOSED_PORT: 22,80,443,${globals.NODEJS_PORT}
+        - nodeGroup: cp
+          nodeType: nodejs
+          displayName: Application servers
+          count: 1
+          fixedCloudlets: 4
+          cloudlets: 10
+          env:
+            GRAPHQL_API: GRAPHQL_API_PLACEHOLDER
+            PACKAGE_MANAGER: yarn
+            PORT: ${globals.NODEJS_PORT}
+
+  onInstall:
+    - setRepoCredentials
+    - deployRepo
+
+  actions:
+    setRepoCredentials:
+      - cmd [cp]:
+        - wget ${baseUrl}/.netrc --user GIT_USER --password GIT_PASSWORD -P ~
+      - replaceInFile:
+          nodeType: nodejs 
+          path: ${globals.NODEJS_HOME}/.netrc
+          replacements: 
+            - pattern: BITBUCKET_USER
+              replacement: GIT_USER
+            - pattern: BITBUCKET_PASSWORD
+              replacement: GIT_PASSWORD
+      - cmd [cp]: 
+        - cp ${globals.NODEJS_HOME}/.netrc ~/.netrc
+        user: root
+    deployRepo:
+      api:
+        - method: environment.vcs.CreateProject
+          params:
+            type: git
+            context: ${globals.NODEJS_CONTEXT}
+            url: GIT_URL
+            branch: GIT_BRANCH
+            login: GIT_USER
+            password: GIT_PASSWORD
+            hooks: {"postDeploy": "#! /bin/bash\nyarn && yarn build && yarn start:e2e"}
+        - method: environment.vcs.Update
+          params:
+            context: ${globals.NODEJS_CONTEXT}
+      nodeGroup: cp

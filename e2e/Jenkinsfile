@@ -1,0 +1,72 @@
+pipeline {
+  agent any
+  environment {
+    REPORTS_FOLDER = 'junit-reports'
+    JELASTIC_CREDENTIALS = credentials('jelastic-credentials')
+    JELASTIC_APP_CREDENTIALS = credentials('jelastic-app-credentials')
+    BACKEND_NAME = credentials('backend-name-credentials') // contains envName + e2e jps url
+    FRONTEND_NAME = credentials('mgmt-frontend-name-credentials') // contains envName + e2e jps url
+  }
+  stages {
+    stage('Starting up backend environment') {
+      environment {
+        GITHUB_CREDENTIALS = credentials('github-credentials')
+        BACKEND_JPS = 'backend.jps'
+      }
+      steps {
+        script {
+          sh "curl -o $BACKEND_JPS $BACKEND_NAME_PSW"
+          sh "sed -i \"s/GIT_USER/$GITHUB_CREDENTIALS_USR/g\" $BACKEND_JPS"
+          sh "sed -i \"s/GIT_PASSWORD/$GITHUB_CREDENTIALS_PSW/g\" $BACKEND_JPS"
+          sh "sed -i \"s/GIT_BRANCH/dev/g\" $BACKEND_JPS"
+          sh "chmod u+x ./common/e2e/deploy-to-jelastic.sh"
+          sh "./common/e2e/deploy-to-jelastic.sh $JELASTIC_APP_CREDENTIALS_USR $JELASTIC_APP_CREDENTIALS_PSW $JELASTIC_CREDENTIALS_USR $JELASTIC_CREDENTIALS_PSW $BACKEND_NAME_USR cp $BACKEND_JPS"
+        }
+      }
+    }
+    stage('Starting up frontend and performing end-to-end tests') {
+      environment {
+        BITBUCKET_CREDENTIALS = credentials('bitbucket-credentials')
+        FRONTEND_JPS = './common/e2e/manifest.jps'
+      }
+      steps {
+        sh "sed -i \"s/GIT_USER/$BITBUCKET_CREDENTIALS_USR/g\" $FRONTEND_JPS"
+        sh "sed -i \"s/GIT_PASSWORD/$BITBUCKET_CREDENTIALS_PSW/g\" $FRONTEND_JPS"
+        sh "sed -i \"s/GIT_BRANCH/$(git branch | grep \* | cut -d ' ' -f2)/g\" $FRONTEND_JPS"
+        sh "sed -i \"s/GIT_URL/$(git remote get-url --push origin)/g\" $FRONTEND_JPS"
+        sh "sed -i \"s/GRAPHQL_API_PLACEHOLDER/$BACKEND_NAME_USR.hidora.com/g\" $FRONTEND_JPS"
+        sh "chmod u+x ./common/e2e/deploy-to-jelastic.sh"
+        sh "./common/e2e/deploy-to-jelastic.sh $JELASTIC_APP_CREDENTIALS_USR $JELASTIC_APP_CREDENTIALS_PSW $JELASTIC_CREDENTIALS_USR $JELASTIC_CREDENTIALS_PSW $FRONTEND_NAME cp $FRONTEND_JPS"
+      }
+    }
+    stage('Retrieving test reports from frontend environment') {
+      steps {
+        deleteFolder(REPORTS_FOLDER)
+        // open ssh connection with frontend environment
+      }
+    }
+    stage('Retrieving artifacts from frontend environment') {
+      steps {
+        // open ssh connection with frontend environment
+        echo "trouduc"
+      }
+    }
+  }
+  post {
+    always {
+      sh "chmod u+x ./common/e2e/stop-jelastic-env.sh"
+      sh "./common/e2e/stop-jelastic-env.sh $JELASTIC_APP_CREDENTIALS_USR $JELASTIC_APP_CREDENTIALS_PSW $JELASTIC_CREDENTIALS_USR $JELASTIC_CREDENTIALS_PSW $FRONTEND_NAME"
+      sh "./common/e2e/stop-jelastic-env.sh $JELASTIC_APP_CREDENTIALS_USR $JELASTIC_APP_CREDENTIALS_PSW $JELASTIC_CREDENTIALS_USR $JELASTIC_CREDENTIALS_PSW $BACKEND_NAME_USR"
+      junit "**/$REPORTS_FOLDER/*.xml"
+      archiveArtifacts artifacts: 'cypress/videos/**/*.mp4, cypress/screenshots/**/*.png'
+    }
+  }
+}
+
+def deleteFolder(folderName) {
+  script {
+    dir(folderName) {
+      deleteDir()
+    }
+  }
+}
