@@ -92,7 +92,9 @@ startEnvIfNecessary() {
   local envName=$2
   local envs=$3
   local envProps=$(echo $envs | jq '.infos[] | select(.env.envName=="${envName}")')
+  echo "envProps = $envProps"
   local status=$(echo $envProps | jq '.env.status')
+  echo "status = $status"
   if [ "$status" != "1" ] ; then
     startEnv $session "$envName"
   fi
