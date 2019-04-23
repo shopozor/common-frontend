@@ -62,7 +62,7 @@ application:
             url: GIT_URL
             branch: GIT_BRANCH
             login: GIT_USER
-            password: GIT_PASSWORD
+            password: GIT_PASSWORD 
             hooks: {"postDeploy": "#! /bin/bash\n cd ${globals.NODEJS_PATH_TO_CONTEXT} && yarn && yarn build && yarn start:e2e"}
         - method: environment.vcs.Update
           params:
