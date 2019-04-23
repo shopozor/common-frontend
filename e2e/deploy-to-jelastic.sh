@@ -57,36 +57,19 @@ waitUntilEnvIsRunning () {
   done
 }
 
-hasTimedOut() {
-  local result=$1
-  [[ "$result" == "17" ]] && echo 1 || echo 0
-}
-
-installEnvUntilNoTimeout() {
-  local session=$1
-  local envName=$2
-  local pathToManifest=$3
-  local manifest=$(cat $pathToManifest)
-  local result="17" # this is the timeout result value
-  while [ "$(hasTimedOut $result)" == 1 ] ; do
-    echo "Attempting installation..." >&2
-    local cmd=$(curl -k \
-      -A "${USER_AGENT}" \
-      -H "${CONTENT_TYPE}" \
-      -X POST -fsS ${HOSTER_URL}"/1.0/development/scripting/rest/eval" \
-      --data "session=${session}&shortdomain=${envName}&envName=${envName}&script=InstallApp&appid=appstore&type=install&charset=UTF-8" --data-urlencode "manifest=$manifest")
-    result=$(getCommandResult $cmd)
-  done
-}
-
 installEnv() {
   local session=$1
   local envName=$2
   local pathToManifest=$3
+  local manifest=$(cat $pathToManifest)
   echo "Installing new environment <$envName> from manifest <$pathToManifest>..." >&2
-  installEnvUntilNoTimeout $session $envName $pathToManifest
-  # From our XP, Jelastic is not reliable enough to assume that the InstallApp command was really successful
-  # Therefore we check that the environment is really running after that command
+  local cmd=$(curl -k \
+    -A "${USER_AGENT}" \
+    -H "${CONTENT_TYPE}" \
+    -X POST -fsS ${HOSTER_URL}"/1.0/development/scripting/rest/eval" \
+    --data "session=${session}&shortdomain=${envName}&envName=${envName}&script=InstallApp&appid=appstore&type=install&charset=UTF-8" --data-urlencode "manifest=$manifest")
+  # From our experience, Jelastic is not reliable enough to assume that the previous command was really 
+  # successful upon return. Therefore we check that the environment is really running after that command.
   waitUntilEnvIsRunning $session $envName
   echo "Environment <$envName> installed" >&2
 }
