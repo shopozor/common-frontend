@@ -20,7 +20,7 @@ export default {
     [types.links.PROFILE]: 'Profile',
 
     [types.links.HOME]: 'Home',
-    [types.links.FAKE_SHOP]: 'Fake Budzonnery',
+    [types.links.SHOP]: 'Budzonnery',
     [types.links.MAP]: 'Map',
     [types.links.CALENDAR]: 'Calendar',
     [types.links.ORDERS]: 'Orders',

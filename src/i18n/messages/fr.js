@@ -20,7 +20,7 @@ export default {
     [types.links.LOGOUT]: 'Se déconnecter',
     [types.links.PROFILE]: 'Profil',
     [types.links.HOME]: 'Accueil',
-    [types.links.FAKE_SHOP]: 'Fausse budzonnerie',
+    [types.links.SHOP]: 'Budzonnerie',
     [types.links.MAP]: 'Carte',
     [types.links.CALENDAR]: 'Calendrier',
     [types.links.ORDERS]: 'Commandes',
