@@ -16,3 +16,4 @@ export const MANAGE_SHOPS = 'manageShops'
 export const MANAGE_SITE = 'manageSite'
 
 export const CONFIRMATION_EMAIL_SENT = 'confirmationEmailSent'
+export const ACTIVATE = 'activate'
