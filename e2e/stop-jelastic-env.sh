@@ -15,7 +15,7 @@ ENV_NAME=$5
 stopEnv() {
   local session=$1
   local envName=$2
-  echo "Stopping up environment <$envName>..." >&2
+  echo "Stopping environment <$envName>..." >&2
   local cmd=$(curl -k \
     -H "${CONTENT_TYPE}" \
     -A "${USER_AGENT}" \
