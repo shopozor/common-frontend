@@ -6,7 +6,7 @@ export const LOGOUT = 'logout'
 export const PROFILE = 'profile'
 
 export const HOME = 'home'
-export const FAKE_SHOP = 'fakeShop'
+export const SHOP = 'shop'
 export const MAP = 'map'
 export const CALENDAR = 'calendar'
 export const ORDERS = 'orders'
@@ -16,3 +16,4 @@ export const MANAGE_SHOPS = 'manageShops'
 export const MANAGE_SITE = 'manageSite'
 
 export const CONFIRMATION_EMAIL_SENT = 'confirmationEmailSent'
+export const ACTIVATE = 'activate'

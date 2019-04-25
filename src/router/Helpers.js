@@ -13,6 +13,7 @@ import { atLeastOneMatch } from '../Helpers.js'
 
 export const generatePath = ({ link }) => {
   if (link === types.links.HOME) return '/'
+  else if (link === types.links.ACTIVATE) return '/activate/:id/:token'
   else return `/${link}`
 }
 
@@ -30,26 +31,25 @@ const generatePermissions = ({ link, accessRules }) => {
   }, [])
 }
 
-const generatePage = ({ link, accessRules, permissions }) => {
+const generatePage = ({ link, accessRules }) => {
   return {
     name: link,
     path: generatePath({ link }),
     component: () => import(`pages/${firstUpperCase(link)}.vue`),
     meta: { permissions: generatePermissions({ link, accessRules }) }
-    // beforeEnter: generateBeforeEnter({ link, accessRules, permissions })
   }
 }
 
-const generatePages = ({ links, accessRules, permissions }) => {
-  return links.map(link => generatePage({ link, accessRules, permissions }))
+const generatePages = ({ links, accessRules }) => {
+  return links.map(link => generatePage({ link, accessRules }))
 }
 
 export const filterAccessibleLinks = ({ links, accessRules, permissions }) => {
   return links.filter(link => checkIfLinkIsAccessible({ link, accessRules, permissions }))
 }
 
-export const generateRoutes = ({ links, accessRules, permissions }) => {
-  const pages = generatePages({ links, accessRules, permissions })
+export const generateRoutes = ({ links, accessRules }) => {
+  const pages = generatePages({ links, accessRules })
   const routes = [
     {
       path: '/',
