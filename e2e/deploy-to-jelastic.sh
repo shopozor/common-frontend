@@ -122,6 +122,9 @@ deployToJelastic() {
     installEnv $SESSION "${ENV_NAME}" "$MANIFEST"
   else
     startEnvIfNecessary $SESSION "${ENV_NAME}" "$ENVS"
+    # TODO:
+    # if env has a vcs project, then update vcs project
+    # otherwise redeploy
     redeployEnvironment $SESSION "${ENV_NAME}" ${DEPLOY_GROUP}
   fi
 
