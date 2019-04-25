@@ -70,7 +70,7 @@ export default {
     },
     cookiesPolicy: {
       accept: 'J\'accepte l\'utilisation de cookies.',
-      explain: 'Nous utilisons des cookies uniquement pour faciliter votre navigation. Aucun cookie n\'est conservé après votre déconnection.'
+      explain: 'Nous utilisons des cookies uniquement pour faciliter votre navigation. Aucun cookie n\'est conservé après votre déconnexion.'
     },
     termsOfService: {
       accept: 'J\'accepte les conditions d\'utilisation.',
