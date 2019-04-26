@@ -25,7 +25,7 @@
     <q-drawer
       id="sideDrawer"
       v-model="drawerOpen"
-      content-class="bg-grey-3">
+      content-class="bg-sideDrawer">
       <side-drawer-content
         :email="email"
         :drawerOpen="drawerOpen"
