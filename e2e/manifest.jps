@@ -8,7 +8,7 @@ application:
 
   globals:
     NODEJS_HOME: /home/node
-    pathToSharedData: ${globals.NODEJS_HOME}/reports
+    # pathToSharedData: ${globals.NODEJS_HOME}/reports
   
   env:
     topology:
@@ -19,17 +19,17 @@ application:
           count: 1
           fixedCloudlets: 4
           cloudlets: 10
-          volumes:
-            - ${globals.pathToSharedData}
-          volumeMounts:
-            ${globals.pathToSharedData}:
-              readOnly: false
-              sourcePath: /data/jenkins
-              sourceNodeGroup: storage
-        - nodeType: storage
-          cloudlets: 8
-          nodeGroup: storage
-          displayName: Tests outputs
+        #   volumes:
+        #     - ${globals.pathToSharedData}
+        #   volumeMounts:
+        #     ${globals.pathToSharedData}:
+        #       readOnly: false
+        #       sourcePath: /data/jenkins
+        #       sourceNodeGroup: storage
+        # - nodeType: storage
+        #   cloudlets: 8
+        #   nodeGroup: storage
+        #   displayName: Tests outputs
 
   onInstall:
     - test
