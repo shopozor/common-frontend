@@ -108,7 +108,8 @@ redeployEnvironment() {
     -X POST \
     -fsS ${HOSTER_URL}/1.0/environment/control/rest/redeploycontainersbygroup \
     -d "appid=${APPID}&session=${session}&envName=${envName}&tag=latest&nodeGroup=${deployGroup}&useExistingVolumes=true&delay=20")
-  exitOnFail $cmd
+  # TODO: when the redeploy has worked, the exitOnFail interprets that as an error
+  # exitOnFail $cmd
   echo "Environment redeployed" >&2
 }
 
@@ -125,6 +126,7 @@ deployToJelastic() {
     # TODO:
     # if env has a vcs project, then update vcs project
     # otherwise redeploy
+    # what does a https://[hoster-api-host]/1.0/environment/vcs/rest/getproject envName, session return?
     redeployEnvironment $SESSION "${ENV_NAME}" ${DEPLOY_GROUP}
   fi
 
