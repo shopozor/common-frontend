@@ -8,7 +8,6 @@ application:
 
   globals:
     NODEJS_HOME: /home/node
-    # pathToSharedData: ${globals.NODEJS_HOME}/reports
   
   env:
     topology:
@@ -19,17 +18,6 @@ application:
           count: 1
           fixedCloudlets: 4
           cloudlets: 10
-        #   volumes:
-        #     - ${globals.pathToSharedData}
-        #   volumeMounts:
-        #     ${globals.pathToSharedData}:
-        #       readOnly: false
-        #       sourcePath: /data/jenkins
-        #       sourceNodeGroup: storage
-        # - nodeType: storage
-        #   cloudlets: 8
-        #   nodeGroup: storage
-        #   displayName: Tests outputs
 
   onInstall:
     - test
@@ -39,3 +27,6 @@ application:
       - cmd [cp]:
         - cd ${globals.NODEJS_HOME}
         - yarn start:e2e
+        - cp -R junit-reports PATH_TO_TEST_RESULTS_PLACEHODER/
+        - cp -R cypress/videos PATH_TO_TEST_RESULTS_PLACEHODER/
+        - cp -R cypress/screenshots PATH_TO_TEST_RESULTS_PLACEHODER/
