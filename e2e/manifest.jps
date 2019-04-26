@@ -23,7 +23,7 @@ application:
             - ${globals.pathToSharedData}
           volumeMounts:
             ${globals.pathToSharedData}:
-              readOnly: true
+              readOnly: false
               sourcePath: /data/jenkins
               sourceNodeGroup: storage
         - nodeType: storage
