@@ -38,5 +38,4 @@ application:
     test:
       - cmd [cp]:
         - cd ${globals.NODEJS_HOME}
-        - export CYPRESS_TAGS="not @wip and not @not-e2e" 
-        - npx cypress run --env configFile=e2e
+        - yarn start:e2e
