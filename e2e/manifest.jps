@@ -27,6 +27,6 @@ application:
       - cmd [cp]:
         - cd ${globals.NODEJS_HOME}
         - yarn start:e2e
-        - cp -R junit-reports PATH_TO_TEST_RESULTS_PLACEHODER/
-        - cp -R cypress/videos PATH_TO_TEST_RESULTS_PLACEHODER/
-        - cp -R cypress/screenshots PATH_TO_TEST_RESULTS_PLACEHODER/
+        # - cp -R junit-reports PATH_TO_TEST_RESULTS_PLACEHODER/
+        # - cp -R cypress/videos PATH_TO_TEST_RESULTS_PLACEHODER/
+        # - cp -R cypress/screenshots PATH_TO_TEST_RESULTS_PLACEHODER/
