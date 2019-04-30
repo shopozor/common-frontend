@@ -1,5 +1,5 @@
 @Library('Helpers')
-import ch.softozor.pipeline
+// import ch.softozor.pipeline
 
 def call() {
   def helpers
