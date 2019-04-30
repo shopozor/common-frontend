@@ -1,3 +1,5 @@
+package ch.softozor.pipeline
+
 def prepareBackendConfiguration(gitUser, gitPwd, gitBranch, backendJps, backendJpsUrl) {
   sh "curl -o $backendJps $backendJpsUrl"
   sh "sed -i \"s/GIT_USER/$gitUser/g\" $backendJps"

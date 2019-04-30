@@ -1,5 +1,8 @@
-def run() {
-  def commonLib
+@Library('Helpers')
+import ch.softozor.pipeline
+
+def call() {
+  def helpers
   pipeline {
     agent any
     parameters {
@@ -16,10 +19,10 @@ def run() {
       VIDEOS_FOLDER = 'videos'
     }
     stages {
-      stage('Load common lib') {
+      stage('Load helpers') {
         steps {
           script {
-            commonLib = load './common/e2e/CommonLib.groovy'
+            helpers = new ch.softozor.pipeline.Helpers()
           }
         }
       }
@@ -30,8 +33,8 @@ def run() {
         }
         steps {
           script {
-            commonLib.prepareBackendConfiguration(GITHUB_CREDENTIALS_USR, GITHUB_CREDENTIALS_PSW, 'dev', BACKEND_JPS, BACKEND_NAME_PSW)
-            commonLib.deploy(BACKEND_JPS, BACKEND_NAME_USR)
+            helpers.prepareBackendConfiguration(GITHUB_CREDENTIALS_USR, GITHUB_CREDENTIALS_PSW, 'dev', BACKEND_JPS, BACKEND_NAME_PSW)
+            helpers.deploy(BACKEND_JPS, BACKEND_NAME_USR)
           }
         }
       }
@@ -51,8 +54,8 @@ def run() {
         }
         steps {
           script {
-            commonLib.buildDockerImage()
-            commonLib.deploy(FRONTEND_JPS, FRONTEND_NAME)
+            helpers.buildDockerImage()
+            helpers.deploy(FRONTEND_JPS, FRONTEND_NAME)
           }
         }
       }
@@ -63,7 +66,7 @@ def run() {
             def targetPath = '/mnt'
             def sourceNodeGroup = 'cp'
             def jenkinsEnvName = JENKINS_URL.split('/')[2].split(':')[0].split('\\.')[0]
-            commonLib.retrieveTestResults(jenkinsEnvName, targetNodeGroup, targetPath, FRONTEND_NAME, sourceNodeGroup)
+            helpers.retrieveTestResults(jenkinsEnvName, targetNodeGroup, targetPath, FRONTEND_NAME, sourceNodeGroup)
           }
         }
       }
@@ -74,10 +77,10 @@ def run() {
           // the environment deletion will trigger a reinstall next time
           // a frontend reinstall is required because at the end of the manifest's installation, we know that the tests are done
           if(params.DELETE_FRONTEND == true) {
-            commonLib.deleteEnvironment(FRONTEND_NAME)
+            helpers.deleteEnvironment(FRONTEND_NAME)
           }
-          commonLib.stopEnvironment(BACKEND_NAME_USR)
-          commonLib.buildArtifacts()
+          helpers.stopEnvironment(BACKEND_NAME_USR)
+          helpers.buildArtifacts()
         }
       }
     }
