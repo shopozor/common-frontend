@@ -1,6 +1,3 @@
-// @Library('Helpers')
-// import ch.softozor.pipeline
-
 def call() {
   def helpers
   pipeline {
