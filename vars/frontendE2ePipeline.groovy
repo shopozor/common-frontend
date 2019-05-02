@@ -51,8 +51,7 @@ def call() {
         }
         steps {
           script {
-            // helpers.buildDockerImage()
-            echo "DOCKER IMAGE BUILD TEMPORARILY DISABLED"
+            helpers.buildDockerImage()
             helpers.deploy(FRONTEND_JPS, FRONTEND_NAME)
           }
         }
