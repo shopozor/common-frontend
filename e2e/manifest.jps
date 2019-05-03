@@ -6,9 +6,6 @@ application:
   version: 0.0
   baseUrl: https://bitbucket.org/softozor/shopozor-common-frontend/raw/master/e2e/
 
-  globals:
-    NODEJS_HOME: /home/node
-  
   env:
     topology:
       nodes:
@@ -18,13 +15,3 @@ application:
           count: 1
           fixedCloudlets: 4
           cloudlets: 10
-      skipNodeEmails: true
-
-  onInstall:
-    - test
-
-  actions:
-    test:
-      - cmd [cp]:
-        - cd ${globals.NODEJS_HOME}
-        - yarn start:e2e

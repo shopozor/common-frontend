@@ -2,9 +2,6 @@ def call() {
   def helpers
   pipeline {
     agent any
-    parameters {
-      booleanParam(name: 'DELETE_FRONTEND', defaultValue: true, description: 'Disable this value if you need to get feedback about the frontend status after the test')
-    }
     environment {  
       BACKEND_NAME = credentials('backend-name-credentials') // contains envName + e2e jps url
       FRONTEND_NAME = credentials('mgmt-frontend-name-credentials') // contains envName
@@ -47,12 +44,14 @@ def call() {
         environment {
           DOCKER_CREDENTIALS = credentials('docker-credentials')
           DOCKER_REPO = "softozor/${FRONTEND_NAME}"
-          FRONTEND_JPS = './common/e2e/manifest.jps'
         }
         steps {
           script {
+            def E2E_JPS = './common/e2e/e2e.jps'
+            def FRONTEND_JPS = './common/e2e/manifest.jps'
             helpers.buildDockerImage()
             helpers.deploy(FRONTEND_JPS, FRONTEND_NAME)
+            helpers.runE2eTests(E2E_JPS, FRONTEND_NAME)
           }
         }
       }
@@ -71,12 +70,8 @@ def call() {
     post {
       always {
         script {
-          // the environment deletion will trigger a reinstall next time
-          // a frontend reinstall is required because at the end of the manifest's installation, we know that the tests are done
-          if(params.DELETE_FRONTEND == true) {
-            helpers.deleteEnvironment(FRONTEND_NAME)
-          }
           helpers.stopEnvironment(BACKEND_NAME_USR)
+          helpers.stopEnvironment(FRONTEND_NAME)
           helpers.buildArtifacts()
         }
       }

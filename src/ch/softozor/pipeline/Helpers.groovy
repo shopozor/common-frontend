@@ -19,6 +19,11 @@ def deploy(backendJps, backendEnvName) {
   sh "./common/e2e/deploy-to-jelastic.sh $JELASTIC_APP_CREDENTIALS_USR $JELASTIC_APP_CREDENTIALS_PSW $JELASTIC_CREDENTIALS_USR $JELASTIC_CREDENTIALS_PSW $backendEnvName cp $backendJps"
 }
 
+def runE2eTests(e2eJps, envName) {
+  sh "chmod u+x ./common/e2e/run-e2e.sh"
+  sh "./common/e2e/run-e2e.sh $JELASTIC_APP_CREDENTIALS_USR $JELASTIC_APP_CREDENTIALS_PSW $JELASTIC_CREDENTIALS_USR $JELASTIC_CREDENTIALS_PSW $envName cp $e2eJps"
+}
+
 def deleteFolder(folderName) {
   dir(folderName) {
     deleteDir()
@@ -39,11 +44,6 @@ def retrieveTestResults(jenkinsEnvName, targetNodeGroup, targetPath, frontendNam
 def buildArtifacts() {
   archiveArtifacts artifacts: "${VIDEOS_FOLDER}/**/*.mp4, ${SCREENSHOTS_FOLDER}/**/*.png"
   junit "${TEST_REPORTS_FOLDER}/*.xml"
-}
-
-def deleteEnvironment(envName) {
-  sh "chmod u+x ./common/e2e/delete-jelastic-env.sh"
-  sh "./common/e2e/delete-jelastic-env.sh $JELASTIC_APP_CREDENTIALS_USR $JELASTIC_APP_CREDENTIALS_PSW $JELASTIC_CREDENTIALS_USR $JELASTIC_CREDENTIALS_PSW $envName"
 }
 
 def stopEnvironment(envName) {
