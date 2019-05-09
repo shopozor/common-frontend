@@ -61,7 +61,7 @@ def call(Map params) {
         steps {
           script {
             def targetNodeGroup = 'cp'
-            def targetPath = '/mnt'
+            def targetPath = "/mnt/${FRONTEND_NAME}"
             def sourceNodeGroup = 'cp'
             def jenkinsEnvName = JENKINS_URL.split('/')[2].split(':')[0].split('\\.')[0]
             helpers.retrieveTestResults(jenkinsEnvName, targetNodeGroup, targetPath, FRONTEND_NAME, sourceNodeGroup)
