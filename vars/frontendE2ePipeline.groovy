@@ -3,7 +3,7 @@ def call() {
   pipeline {
     agent any
     environment {  
-      BACKEND_NAME = credentials('backend-name-credentials') // contains envName + e2e jps url
+      BACKEND_NAME = credentials('backend-name-credentials') // contains envName + base jps url
       FRONTEND_NAME = credentials('mgmt-frontend-name-credentials') // contains envName
       JELASTIC_APP_CREDENTIALS = credentials('jelastic-app-credentials')
       JELASTIC_CREDENTIALS = credentials('jelastic-credentials')
@@ -24,11 +24,13 @@ def call() {
         environment {
           GITHUB_CREDENTIALS = credentials('github-credentials')
           BACKEND_JPS = 'backend.jps'
+          E2E_JPS = 'backend-e2e.jps'
         }
         steps {
           script {
-            helpers.prepareBackendConfiguration(GITHUB_CREDENTIALS_USR, GITHUB_CREDENTIALS_PSW, 'dev', BACKEND_JPS, BACKEND_NAME_PSW)
+            helpers.prepareBackendConfiguration(GITHUB_CREDENTIALS_USR, GITHUB_CREDENTIALS_PSW, 'dev', BACKEND_JPS, E2E_JPS, BACKEND_NAME_PSW)
             helpers.deploy(BACKEND_JPS, BACKEND_NAME_USR)
+            helpers.resetDatabase(E2E_JPS, BACKEND_NAME_USR)
           }
         }
       }

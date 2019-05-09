@@ -1,7 +1,8 @@
 package ch.softozor.pipeline
 
-def prepareBackendConfiguration(gitUser, gitPwd, gitBranch, backendJps, backendJpsUrl) {
-  sh "curl -o $backendJps $backendJpsUrl"
+def prepareBackendConfiguration(gitUser, gitPwd, gitBranch, backendJps, e2eJps, backendJpsUrl) {
+  sh "curl -o $backendJps $backendJpsUrl/manifest.jps"
+  sh "curl -o $e2eJps $backendJpsUrl/e2e.jps"
   sh "sed -i \"s/GIT_USER/$gitUser/g\" $backendJps"
   sh "sed -i \"s/GIT_PASSWORD/$gitPwd/g\" $backendJps"
   sh "sed -i \"s/GIT_BRANCH/$gitBranch/g\" $backendJps"
@@ -22,6 +23,10 @@ def deploy(backendJps, backendEnvName) {
 def runE2eTests(e2eJps, envName) {
   sh "chmod u+x ./common/e2e/run-e2e.sh"
   sh "./common/e2e/run-e2e.sh $JELASTIC_APP_CREDENTIALS_USR $JELASTIC_APP_CREDENTIALS_PSW $JELASTIC_CREDENTIALS_USR $JELASTIC_CREDENTIALS_PSW $envName cp $e2eJps"
+}
+
+def resetDatabase(e2eJps, envName) {
+  runE2eTests(e2eJps, envName)
 }
 
 def deleteFolder(folderName) {
