@@ -42,9 +42,9 @@ def retrieveTestResults(jenkinsEnvName, targetNodeGroup, targetPath, frontendNam
   deleteFolder(SCREENSHOTS_FOLDER)
   sh "chmod u+x ./common/e2e/mount-test-results.sh"
   sh "./common/e2e/mount-test-results.sh $JELASTIC_APP_CREDENTIALS_USR $JELASTIC_APP_CREDENTIALS_PSW $JELASTIC_CREDENTIALS_USR $JELASTIC_CREDENTIALS_PSW $jenkinsEnvName $targetNodeGroup $targetPath $frontendName $sourceNodeGroup $PATH_TO_TEST_RESULTS"
-  sh "cp -R /mnt/cypress/${SCREENSHOTS_FOLDER} ."
-  sh "cp -R /mnt/cypress/${VIDEOS_FOLDER} ."
-  sh "cp -R /mnt/${TEST_REPORTS_FOLDER} ."
+  sh "cp -R ${targetPath}/cypress/${SCREENSHOTS_FOLDER} ."
+  sh "cp -R ${targetPath}/cypress/${VIDEOS_FOLDER} ."
+  sh "cp -R ${targetPath}/${TEST_REPORTS_FOLDER} ."
 }
 
 def buildArtifacts() {
