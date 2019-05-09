@@ -93,6 +93,7 @@ installEnv() {
     -H "${CONTENT_TYPE}" \
     -X POST -fsS ${HOSTER_URL}"/1.0/development/scripting/rest/eval" \
     --data "session=${session}&shortdomain=${envName}&envName=${envName}&script=InstallApp&appid=appstore&type=install&charset=UTF-8" --data-urlencode "manifest=$manifest")
+  echo "Installation result: $cmd" >&2
   # From our experience, Jelastic is not reliable enough to assume that the previous command was really 
   # successful upon return. Therefore we check that the environment is really running after that command.
   waitUntilEnvIsRunning $session $envName
