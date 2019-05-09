@@ -4,7 +4,6 @@ application:
   id: management-frontend
   name: Management frontend
   version: 0.0
-  baseUrl: https://bitbucket.org/softozor/shopozor-common-frontend/raw/master/e2e/
 
   globals:
     NODEJS_HOME: /home/node
