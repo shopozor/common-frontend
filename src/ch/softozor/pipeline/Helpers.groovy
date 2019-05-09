@@ -1,12 +1,16 @@
 package ch.softozor.pipeline
 
 def prepareBackendConfiguration(gitUser, gitPwd, gitBranch, backendJps, e2eJps, backendJpsUrl) {
-  echo backendJpsUrl
   sh "curl -o $backendJps $backendJpsUrl/manifest.jps"
   sh "curl -o $e2eJps $backendJpsUrl/e2e.jps"
   sh "sed -i \"s/GIT_USER/$gitUser/g\" $backendJps"
   sh "sed -i \"s/GIT_PASSWORD/$gitPwd/g\" $backendJps"
   sh "sed -i \"s/GIT_BRANCH/$gitBranch/g\" $backendJps"
+}
+
+def prepareFrontendConfiguration(frontendType, frontendJps, e2eJps) {
+  sh "sed -i \"s/FRONTEND_TYPE/$frontendType/g\" $frontendJps"
+  sh "sed -i \"s/FRONTEND_TYPE/$frontendType/g\" $e2eJps"
 }
 
 def buildDockerImage() {

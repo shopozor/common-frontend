@@ -52,6 +52,7 @@ def call(Map params) {
             def E2E_JPS = './common/e2e/e2e.jps'
             def FRONTEND_JPS = './common/e2e/manifest.jps'
             helpers.buildDockerImage()
+            helpers.prepareFrontendConfiguration(params.frontendType, FRONTEND_JPS, E2E_JPS)
             helpers.deploy(FRONTEND_JPS, FRONTEND_NAME)
             helpers.runE2eTests(E2E_JPS, FRONTEND_NAME)
           }
