@@ -4,7 +4,8 @@ def call(Map params) {
     agent any
     environment {  
       BACKEND_NAME = credentials('backend-name-credentials') // contains envName + base jps url
-      FRONTEND_NAME = credentials("${params.frontendType}-frontend-name-credentials") // contains envName
+      // FRONTEND_NAME = credentials("${params.frontendType}-frontend-name-credentials") // contains envName
+      FRONTEND_NAME = params.frontendName
       JELASTIC_APP_CREDENTIALS = credentials('jelastic-app-credentials')
       JELASTIC_CREDENTIALS = credentials('jelastic-credentials')
       PATH_TO_TEST_RESULTS = '/home/node'
@@ -52,7 +53,7 @@ def call(Map params) {
             def E2E_JPS = './common/e2e/e2e.jps'
             def FRONTEND_JPS = './common/e2e/manifest.jps'
             helpers.buildDockerImage()
-            helpers.prepareFrontendConfiguration(params.frontendType, FRONTEND_JPS, E2E_JPS)
+            helpers.prepareFrontendConfiguration(FRONTEND_NAME, FRONTEND_JPS, E2E_JPS)
             helpers.deploy(FRONTEND_JPS, FRONTEND_NAME)
             helpers.runE2eTests(E2E_JPS, FRONTEND_NAME)
           }

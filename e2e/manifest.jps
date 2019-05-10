@@ -1,15 +1,15 @@
 jpsVersion: 1.3
 jpsType: install
 application:
-  id: FRONTEND_TYPE-frontend
-  name: FRONTEND_TYPE frontend e2e
+  id: FRONTEND_NAME
+  name: FRONTEND_NAME
   version: 0.0
 
   env:
     topology:
       nodes:
         - nodeGroup: cp
-          image: softozor/shopozor-FRONTEND_TYPE-frontend-e2e:latest
+          image: softozor/FRONTEND_NAME:latest
           displayName: Application servers
           count: 1
           fixedCloudlets: 4
