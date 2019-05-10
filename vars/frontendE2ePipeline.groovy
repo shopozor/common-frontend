@@ -3,7 +3,7 @@ def call(Map params) {
   pipeline {
     agent any
     environment {  
-      BACKEND_NAME = credentials('backend-name-credentials') // contains envName + base jps url
+      BACKEND_NAME = credentials("${params.frontendType}-backend-name-credentials") // contains envName + base jps url
       FRONTEND_NAME = credentials("${params.frontendType}-frontend-name-credentials") // contains envName
       JELASTIC_APP_CREDENTIALS = credentials('jelastic-app-credentials')
       JELASTIC_CREDENTIALS = credentials('jelastic-credentials')
