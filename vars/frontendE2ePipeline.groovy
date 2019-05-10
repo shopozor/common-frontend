@@ -4,8 +4,8 @@ def call(Map params) {
     agent any
     environment {  
       BACKEND_NAME = credentials('backend-name-credentials') // contains envName + base jps url
-      // FRONTEND_NAME = credentials("${params.frontendType}-frontend-name-credentials") // contains envName
-      FRONTEND_NAME = "${params.frontendName}"
+      FRONTEND_NAME = credentials("${params.frontendType}-frontend-name-credentials") // contains envName
+      // FRONTEND_NAME = "${params.frontendName}"
       JELASTIC_APP_CREDENTIALS = credentials('jelastic-app-credentials')
       JELASTIC_CREDENTIALS = credentials('jelastic-credentials')
       PATH_TO_TEST_RESULTS = '/home/node'
