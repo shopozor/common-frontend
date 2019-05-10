@@ -8,9 +8,9 @@ def prepareBackendConfiguration(gitUser, gitPwd, gitBranch, backendJps, e2eJps, 
   sh "sed -i \"s/GIT_BRANCH/$gitBranch/g\" $backendJps"
 }
 
-def prepareFrontendConfiguration(frontendType, frontendJps, e2eJps) {
-  sh "sed -i \"s/FRONTEND_TYPE/$frontendType/g\" $frontendJps"
-  sh "sed -i \"s/FRONTEND_TYPE/$frontendType/g\" $e2eJps"
+def prepareFrontendConfiguration(frontendName, frontendJps, e2eJps) {
+  sh "sed -i \"s/FRONTEND_NAME/$frontendName/g\" $frontendJps"
+  sh "sed -i \"s/FRONTEND_NAME/$frontendName/g\" $e2eJps"
 }
 
 def buildDockerImage() {
