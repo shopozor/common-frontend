@@ -13,8 +13,14 @@
 export default {
   name: 'pageLink',
   props: {
-    path: String,
-    label: String
+    path: {
+      type: String,
+      required: true
+    },
+    label: {
+      type: String,
+      required: true
+    }
   },
   computed: {
     isActive () {
