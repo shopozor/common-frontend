@@ -7,7 +7,8 @@
   "env": {
     "fakeGraphql": false,
     "timeoutInMs": 1000,
-    "timeDeltaInMs": 10
+    "timeDeltaInMs": 10,
+    "TAGS": "not @wip and not @not-e2e"
   },
   "reporter": "junit",
   "reporterOptions": {
