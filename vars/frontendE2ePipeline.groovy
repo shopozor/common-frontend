@@ -1,5 +1,5 @@
 def call(Map params) {
-  def helpers
+  def helpers = new ch.softozor.pipeline.Helpers()
   pipeline {
     agent any
     environment {  
@@ -13,13 +13,6 @@ def call(Map params) {
       VIDEOS_FOLDER = 'videos'
     }
     stages {
-      stage('Load helpers') {
-        steps {
-          script {
-            helpers = new ch.softozor.pipeline.Helpers()
-          }
-        }
-      }
       stage('Starting up backend environment') {
         environment {
           GITHUB_CREDENTIALS = credentials('github-credentials')

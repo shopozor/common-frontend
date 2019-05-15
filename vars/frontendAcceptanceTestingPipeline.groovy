@@ -10,13 +10,6 @@ def call() {
       REPORTS_FOLDER = 'junit-reports'    
     }
     stages {
-      // stage('Load helpers') {
-      //   steps {
-      //     script {
-      //       helpers = new ch.softozor.pipeline.Helpers()
-      //     }
-      //   }
-      // }
       stage('Node Modules Installation') {
         steps {
           sh "CYPRESS_CACHE_FOLDER=$WORKSPACE/.cache yarn"
