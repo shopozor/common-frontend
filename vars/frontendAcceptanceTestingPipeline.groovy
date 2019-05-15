@@ -1,5 +1,5 @@
 def call() {
-  def helpers
+  def helpers = new ch.softozor.pipeline.Helpers()
   pipeline {
     agent {
       docker {
@@ -10,13 +10,13 @@ def call() {
       REPORTS_FOLDER = 'junit-reports'    
     }
     stages {
-      stage('Load helpers') {
-        steps {
-          script {
-            helpers = new ch.softozor.pipeline.Helpers()
-          }
-        }
-      }
+      // stage('Load helpers') {
+      //   steps {
+      //     script {
+      //       helpers = new ch.softozor.pipeline.Helpers()
+      //     }
+      //   }
+      // }
       stage('Node Modules Installation') {
         steps {
           sh "CYPRESS_CACHE_FOLDER=$WORKSPACE/.cache yarn"
@@ -32,8 +32,10 @@ def call() {
       }
       stage('Performing acceptance tests') {
         steps {
-          helpers.deleteFolder(REPORTS_FOLDER)
-          sh "CYPRESS_CACHE_FOLDER=$WORKSPACE/.cache yarn start:ci"
+          script {
+            helpers.deleteFolder(REPORTS_FOLDER)
+            sh "CYPRESS_CACHE_FOLDER=$WORKSPACE/.cache yarn start:ci"
+          }
         }
       }
     }
