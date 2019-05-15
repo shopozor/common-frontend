@@ -32,8 +32,10 @@ def call() {
       }
       stage('Performing acceptance tests') {
         steps {
-          helpers.deleteFolder(REPORTS_FOLDER)
-          sh "CYPRESS_CACHE_FOLDER=$WORKSPACE/.cache yarn start:ci"
+          script {
+            helpers.deleteFolder(REPORTS_FOLDER)
+            sh "CYPRESS_CACHE_FOLDER=$WORKSPACE/.cache yarn start:ci"
+          }
         }
       }
     }

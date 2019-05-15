@@ -28,8 +28,10 @@ def call() {
       }
       stage('Performing unit tests') {
         steps {
-          helpers.deleteFolder(REPORTS_FOLDER)
-          sh "yarn test:unit:ci"
+          script {
+            helpers.deleteFolder(REPORTS_FOLDER)
+            sh "yarn test:unit:ci"
+          }
         }
       }
     }
