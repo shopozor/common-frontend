@@ -1,8 +1,6 @@
 const jwtDecode = require('jwt-decode')
 import { duration } from 'moment'
 
-import { injectResponseFixtureIfFaked } from '../../common/fakeServer'
-
 import types from '../../../../src/types'
 
 // import store from '../../../../src/store/index'
