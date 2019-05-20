@@ -1,12 +1,12 @@
 <template>
   <q-input
-    v-model="value"
+    :value="value"
     :type="type"
-    :float-label="floatLabel"
     :label="label"
     :hint="hint"
     :error-message="errorMessage"
     @input="$emit('input', $event)"
+    @blur="$emit('touched')"
     :error="showError && knowError"
     no-error-icon>
     <template v-slot:before>
@@ -26,47 +26,41 @@ import ValidityIcon from './ValidityIcon'
 
 export default {
   name: 'InputWithValidation',
-  data () {
-    return {
-      value: ''
-    }
-  },
   props: {
+    value: {
+      required: true
+    },
     type: {
       type: String,
-      default: 'text'
-    },
-    floatLabel: {
-      type: String,
-      default: ''
+      default: () => 'text'
     },
     label: {
       type: String,
-      default: ''
+      default: () => ''
     },
     hint: {
       type: String,
-      default: ''
+      default: () => ''
     },
     errorMessage: {
       type: String,
-      default: ''
+      default: () => ''
     },
     iconName: {
       type: String,
-      default: 'edit'
+      default: () => 'edit'
     },
     showError: {
       type: Boolean,
-      default: false
+      default: () => false
     },
     knowError: {
       type: Boolean,
-      default: true
+      default: () => true
     },
     mandatory: {
       type: Boolean,
-      default: false
+      default: () => false
     }
   },
   components: { ValidityIcon }

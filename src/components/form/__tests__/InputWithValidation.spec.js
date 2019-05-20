@@ -29,4 +29,10 @@ describe('InputWithValidation', () => {
     wrapper.setProps({ knowError: true, showError: false })
     expect(wrapper.classes()).not.toContain('q-field--error')
   })
+
+  it('triggers the event "touched" on blur', () => {
+    // voir la réponse sur stackoverflow
+    // wrapper.trigger('blur')
+    // expect(wrapper.emitted().touched).toBe(true)
+  })
 })
