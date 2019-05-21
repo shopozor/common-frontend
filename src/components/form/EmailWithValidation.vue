@@ -1,17 +1,21 @@
 <template>
-  <input-with-validation
-    :value="value"
-    type="email"
-    :label="$t('profile.email')"
-    :hint="hint"
-    :errorMessage="errorMessage"
-    iconName="mail"
-    :showError="$v.value.$error"
-    :knowError="$v.value.$invalid"
-    :mandatory="mandatory"
-    @input="input"
-    @touched="$v.value.$touch"
-  />
+  <q-item>
+    <q-item-section>
+      <input-with-validation
+        :value="value"
+        type="email"
+        :label="$t('profile.email')"
+        :hint="hint"
+        :errorMessage="errorMessage"
+        iconName="mail"
+        :showError="$v.value.$error"
+        :knowError="$v.value.$invalid"
+        :mandatory="mandatory"
+        @input="input"
+        @touched="$v.value.$touch"
+      />
+    </q-item-section>
+  </q-item>
 </template>
 
 <script>

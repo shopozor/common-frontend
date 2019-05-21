@@ -1,17 +1,21 @@
 <template>
-  <input-with-validation
-    :value="value"
-    type="password"
-    :label="$t('profile.password')"
-    :hint="hint"
-    :errorMessage="errorMessage"
-    iconName="vpn_lock"
-    :showError="$v.value.$error"
-    :knowError="$v.value.$invalid"
-    :mandatory="mandatory"
-    @input="input"
-    @touched="$v.value.$touch"
-  />
+  <q-item>
+    <q-item-section>
+      <input-with-validation
+        :value="value"
+        type="password"
+        :label="$t('profile.password')"
+        :hint="hint"
+        :errorMessage="errorMessage"
+        iconName="vpn_lock"
+        :showError="$v.value.$error"
+        :knowError="$v.value.$invalid"
+        :mandatory="mandatory"
+        @input="input"
+        @touched="$v.value.$touch"
+      />
+    </q-item-section>
+  </q-item>
 </template>
 
 <script>

@@ -13,6 +13,7 @@ describe('mocking vuelidate', () => {
   }
 
   const wrapper = mountQuasar(PasswordWithValidation, { mocks: { $v: initial$v } })
+  const InputWithValidation = wrapper.find({ name: 'InputWithValidation' })
 
   const clear = () => {
     wrapper.vm.$v = initial$v
@@ -24,8 +25,7 @@ describe('mocking vuelidate', () => {
   it('sets InputWithValidation "showError" prop to $v.value.$error', () => {
     const testShowError = value => {
       wrapper.vm.$v.value.$error = value
-      const InputWithValidation = wrapper.vm.$children[0]
-      expect(InputWithValidation.$props.showError).toBe(value)
+      expect(InputWithValidation.props().showError).toBe(value)
     }
     testShowError(false)
     testShowError(true)
@@ -34,8 +34,7 @@ describe('mocking vuelidate', () => {
   it('sets InputWithValidation "knowError" prop to $v.value.$invalid', () => {
     const testKnowError = value => {
       wrapper.vm.$v.value.$invalid = value
-      const InputWithValidation = wrapper.vm.$children[0]
-      expect(InputWithValidation.$props.knowError).toBe(value)
+      expect(InputWithValidation.props().knowError).toBe(value)
     }
     testKnowError(false)
     testKnowError(true)
@@ -44,20 +43,19 @@ describe('mocking vuelidate', () => {
   it('sets InputWithValidation "mandatory" prop to its own "mandatory" prop', () => {
     const testMandatory = value => {
       wrapper.setProps({ mandatory: value })
-      const InputWithValidation = wrapper.vm.$children[0]
-      expect(InputWithValidation.$props.mandatory).toBe(value)
+      expect(InputWithValidation.props().mandatory).toBe(value)
     }
     testMandatory(true)
     testMandatory(false)
   })
 
   it('calls "$v.value.$touch()" function when InputWithValidation emits "touched" event', () => {
-    wrapper.vm.$children[0].$emit('touched')
+    InputWithValidation.vm.$emit('touched')
     expect(wrapper.vm.$v.value.$touch).toHaveBeenCalled()
   })
 
   it('emits "input" and "validity-check" event when InputVithValidation emits "input"', () => {
-    wrapper.vm.$children[0].$emit('input')
+    InputWithValidation.vm.$emit('input')
     expect(wrapper.emitted().input).toBeTruthy()
     expect(wrapper.emitted()['validity-check']).toBeTruthy()
   })
