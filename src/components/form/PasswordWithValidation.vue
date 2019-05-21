@@ -54,12 +54,10 @@ export default {
         if (this.mandatory) return helpers.req(value)
         else return true
       },
-      sameAs: function (value) {
+      correct: function (value) {
         if (this.repeatPassword) {
-          console.log(`${value} =?= ${this.repeatPassword}`)
           return value === this.repeatPassword
         } else {
-          console.log(`${value} matches politics ?`)
           return validate(value)
         }
       }

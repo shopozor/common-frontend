@@ -1,6 +1,7 @@
 import PasswordWithValidation from '../PasswordWithValidation'
 import { mountQuasar } from '../../../../../test/jest/utils'
 // import vuelidate from '../../../../../src/boot/vuelidate'
+// import { passwords } from '../passwordPolitics'
 
 describe('EmailWithValidation', () => {
   const initial$v = {
@@ -50,7 +51,13 @@ describe('EmailWithValidation', () => {
     testMandatory(false)
   })
 
-  it('detects an error if the value does not follow password politics', () => {
-    // TODO
+  it('detects an error if the value does not follow password politics and "repeatPassword" prop is false or unset', () => {
+    // Object.keys(passwords).forEach(description => {
+    //   const password = passwords[description].password
+    //   const isValid = passwords[description].isValid
+
+    //   const expected = `it returns ${isValid} if password ${description}`
+    //   expect(received).toBe(expected)
+    // })
   })
 })

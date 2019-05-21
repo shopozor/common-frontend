@@ -1,15 +1,13 @@
-import validate from '../passwordPolitics'
+import validate, { passwords } from '../passwordPolitics'
 
 describe('Password politics', () => {
-  it('returns false if password length is smaller than 8', () => {
-    expect(validate('aBc4!=7')).toBe(false)
-  })
-
-  it('returns false if password length is greater than 20', () => {
-    expect(validate('abc4!=789012345678901')).toBe(false)
-  })
-
-  it('returns true in all other cases', () => {
-    expect(validate('abc4!=78'))
+  it('matches password politics', () => {
+    Object.keys(passwords).forEach(description => {
+      const password = passwords[description].password
+      const isValid = passwords[description].isValid
+      const received = `it returns ${validate(password)} if password ${description}`
+      const expected = `it returns ${isValid} if password ${description}`
+      expect(received).toBe(expected)
+    })
   })
 })
