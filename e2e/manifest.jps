@@ -14,3 +14,4 @@ application:
           count: 1
           fixedCloudlets: 4
           cloudlets: 10
+      skipNodeEmails: true
