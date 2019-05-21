@@ -1,7 +1,7 @@
-import validate, { passwords } from '../passwordPolitics'
+import validate, { passwords } from '../passwordPolicy'
 
-describe('Password politics', () => {
-  it('matches password politics', () => {
+describe('Password policy', () => {
+  it('matches password policy', () => {
     Object.keys(passwords).forEach(description => {
       const password = passwords[description].password
       const isValid = passwords[description].isValid

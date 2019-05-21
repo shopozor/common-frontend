@@ -1,14 +1,14 @@
 import PasswordWithValidation from '../PasswordWithValidation'
 import { mountQuasar } from '../../../../../test/jest/utils'
-// import vuelidate from '../../../../../src/boot/vuelidate'
-// import { passwords } from '../passwordPolitics'
+import vuelidate from '../../../../../src/boot/vuelidate'
+import { passwords } from '../passwordPolicy'
 
-describe('EmailWithValidation', () => {
+describe('mocking vuelidate', () => {
   const initial$v = {
     value: {
       $error: false,
       $invalid: true,
-      $touch: () => jest.fn
+      $touch: jest.fn()
     }
   }
 
@@ -51,13 +51,47 @@ describe('EmailWithValidation', () => {
     testMandatory(false)
   })
 
-  it('detects an error if the value does not follow password politics and "repeatPassword" prop is false or unset', () => {
-    // Object.keys(passwords).forEach(description => {
-    //   const password = passwords[description].password
-    //   const isValid = passwords[description].isValid
+  it('calls "$v.value.$touch()" function when InputWithValidation emits "touched" event', () => {
+    wrapper.vm.$children[0].$emit('touched')
+    expect(wrapper.vm.$v.value.$touch).toHaveBeenCalled()
+  })
 
-    //   const expected = `it returns ${isValid} if password ${description}`
-    //   expect(received).toBe(expected)
-    // })
+  it('emits "input" and "validity-check" event when InputVithValidation emits "input"', () => {
+    wrapper.vm.$children[0].$emit('input')
+    expect(wrapper.emitted().input).toBeTruthy()
+    expect(wrapper.emitted()['validity-check']).toBeTruthy()
+  })
+})
+
+describe('using vuelidate', () => {
+  const wrapper = mountQuasar(PasswordWithValidation, { boot: [vuelidate] })
+
+  it('detects an error iif the value does not follow password policy and "repeatPassword" prop is false or unset', () => {
+    const testPolicy = () => {
+      Object.keys(passwords).forEach(description => {
+        const password = passwords[description].password
+        const isValid = passwords[description].isValid
+        wrapper.setProps({ ...wrapper.props(), value: password })
+        expect(wrapper.vm.$v.value.$invalid).toBe(!isValid)
+      })
+    }
+
+    testPolicy()
+    wrapper.setProps({ repeatPassword: false })
+    testPolicy()
+  })
+
+  it('detects an error iif the value does not match the "repeatPassword" prop', () => {
+    wrapper.setProps({
+      repeatPassword: 'mustMatchThis',
+      value: 'doesNotMatchThat'
+    })
+    expect(wrapper.vm.$v.value.$invalid).toBe(true)
+
+    wrapper.setProps({
+      repeatPassword: 'doesMatchThis',
+      value: 'doesMatchThis'
+    })
+    expect(wrapper.vm.$v.value.$invalid).toBe(false)
   })
 })

@@ -2,12 +2,12 @@ import EmailWithValidation from '../EmailWithValidation'
 import { mountQuasar } from '../../../../../test/jest/utils'
 import vuelidate from '../../../../../src/boot/vuelidate'
 
-describe('EmailWithValidation', () => {
+describe('mocking vuelidate', () => {
   const initial$v = {
     value: {
       $error: false,
       $invalid: true,
-      $touch: () => jest.fn
+      $touch: jest.fn()
     }
   }
 
@@ -50,6 +50,21 @@ describe('EmailWithValidation', () => {
     testMandatory(false)
   })
 
+  it('calls "$v.value.$touch()" function when InputWithValidation emits "touched" event', () => {
+    wrapper.vm.$children[0].$emit('touched')
+    expect(wrapper.vm.$v.value.$touch).toHaveBeenCalled()
+  })
+
+  it('emits "input" and "validity-check" event when InputVithValidation emits "input"', () => {
+    wrapper.vm.$children[0].$emit('input')
+    expect(wrapper.emitted().input).toBeTruthy()
+    expect(wrapper.emitted()['validity-check']).toBeTruthy()
+  })
+})
+
+describe('using vuelidate', () => {
+  const wrapper = mountQuasar(EmailWithValidation, { boot: [vuelidate] })
+
   it('detects an error if the value is not an email', () => {
     const values = {
       'missing.arobas.com': false,
@@ -57,11 +72,9 @@ describe('EmailWithValidation', () => {
       'correct@email.com': true
     }
 
-    const wrapperWithValidator = mountQuasar(EmailWithValidation, { boot: [vuelidate] })
-
     const testValue = value => {
-      wrapperWithValidator.setProps({ value })
-      expect({[value]: !wrapperWithValidator.vm.$v.value.$invalid}).toEqual({[value]: values[value]})
+      wrapper.setProps({ value })
+      expect({[value]: !wrapper.vm.$v.value.$invalid}).toEqual({[value]: values[value]})
     }
 
     Object.keys(values).forEach(key => testValue(key))

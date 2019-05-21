@@ -17,7 +17,7 @@
 <script>
 import InputWithValidation from './InputWithValidation'
 import { helpers } from 'vuelidate/lib/validators'
-import validate from './passwordPolitics'
+import validate from './passwordPolicy'
 
 export default {
   name: 'PasswordWithValidation',
