@@ -1,4 +1,11 @@
 {
+  "name": "shopozor-common-frontend",
+  "version": "1.0.0",
+  "description": "Code commun aux frontends du Shopozor",
+  "productName": "La Budzonnerie",
+  "cordovaId": "org.cordova.quasar.app",
+  "author": "Softozor",
+  "private": true,
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
