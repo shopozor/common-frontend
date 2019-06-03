@@ -9,8 +9,6 @@ fi
 ROOT=$1
 
 pip install pre-commit
-cd $ROOT
-pre-commit install 
 cd $ROOT/graphql
 pre-commit install 
 cd $ROOT/cypress/fixtures
