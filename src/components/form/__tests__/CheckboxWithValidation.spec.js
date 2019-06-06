@@ -18,10 +18,13 @@ describe('CheckboxWithValidation', () => {
   })
 
   it('has a q-dialog component which displays the default slot', () => {
-    const btn = wrapper.find({ name: 'QBtn' })
-    btn.trigger('click')
-    const dialog = wrapper.find({ name: 'QDialog' })
-    console.log(dialog.vm.$children)
-    // expect(dialog.contains(dummyContent)).toBeTruthy()
+    expect(wrapper.vm.$slots.default[0].text).toContain(dummyContent)
+  })
+
+  it('is aware when the checkbox has been clicked', () => {
+    expect(wrapper.vm.touched).toBeFalsy()
+    const checkbox = wrapper.find({ name: 'QCheckbox' })
+    checkbox.trigger('click')
+    expect(wrapper.vm.touched).toBeTruthy()
   })
 })
