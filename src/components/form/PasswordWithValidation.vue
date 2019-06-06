@@ -8,8 +8,8 @@
         :hint="hint"
         :errorMessage="errorMessage"
         iconName="vpn_lock"
-        :showError="$v.value.$error"
-        :knowError="$v.value.$invalid"
+        :showError="showError"
+        :knowError="knowError"
         :mandatory="mandatory"
         @input="input"
         @touched="$v.value.$touch"
@@ -43,6 +43,21 @@ export default {
     },
     repeatPassword: {
       type: String
+    }
+  },
+  computed: {
+    showError () {
+      return this.$v.value.$error
+    },
+    /**
+     * Suboptimal code
+     * I use computed properties to emit the validity-check event
+     * when $v.value.$invalid changes.
+     * There must be some cleaner way to do that.
+     */
+    knowError () {
+      this.$emit('validity-check', !this.$v.value.$invalid)
+      return this.$v.value.$invalid
     }
   },
   methods: {
