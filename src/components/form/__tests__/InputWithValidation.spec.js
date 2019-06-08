@@ -1,5 +1,5 @@
 import InputWithValidation from '../InputWithValidation'
-import { mountQuasar } from '../../../../../test/jest/utils'
+import { mountQuasar } from '../../../../unit-tests/utils'
 
 describe('InputWithValidation', () => {
   const wrapper = mountQuasar(InputWithValidation)

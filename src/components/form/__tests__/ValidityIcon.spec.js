@@ -1,5 +1,5 @@
 import ValidityIcon from '../ValidityIcon'
-import { mountQuasar } from '../../../../../test/jest/utils'
+import { mountQuasar } from '../../../../unit-tests/utils'
 
 describe('Validity Icon', () => {
   const wrapper = mountQuasar(ValidityIcon)
