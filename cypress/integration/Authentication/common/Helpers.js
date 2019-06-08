@@ -3,7 +3,7 @@ import { duration } from 'moment'
 
 import { injectResponseFixtureIfFaked } from '../../common/fakeServer'
 
-import types from '../../../../src/types'
+import types from '../../../../types'
 
 // import store from '../../../../src/store/index'
 
@@ -25,7 +25,7 @@ export function login (persona) {
       // TODO: instead of the above code, we need something like
       // // TODO: I will probably need to import the action directly and provide it with the commit method
       // let stayLoggedIn = true
-      // // // TODO: use the const defined in /src/types/links.js
+      // // // TODO: use the const defined in /types/links.js
       // email = user.email
       // password = user.password
       // store.dispatch('login', { email, password, stayLoggedIn })
