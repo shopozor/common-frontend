@@ -80,6 +80,14 @@ export default {
     emailSent: 'Un email avec un lien d\'activation vous a été transmis. Cliquez sur ce lien pour finaliser la création de votre compte.',
     correctErrors: 'Veuillez corriger les erreurs.'
   },
+  activate: {
+    pending: 'Votre compte est en train d\'être activé.',
+    success: 'Votre compte a été correctement activé.',
+    error: {
+      expiredLink: 'Votre compte n\'a pas pu être activé. Le lien a expiré.',
+      unknown: 'Votre compte n\'a pas pu être activé à cause d\'une erreur inconnue.'
+    }
+  },
   login: {
     stayLoggedIn: 'rester connecté',
     connect: 'se connecter',
