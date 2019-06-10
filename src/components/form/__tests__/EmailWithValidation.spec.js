@@ -1,5 +1,5 @@
 import EmailWithValidation from '../EmailWithValidation'
-import { mountQuasar } from '../../../../../test/jest/utils'
+import { mountQuasar } from '../../../../unit-tests/utils'
 import vuelidate from '../../../../../src/boot/vuelidate'
 
 describe('mocking vuelidate', () => {

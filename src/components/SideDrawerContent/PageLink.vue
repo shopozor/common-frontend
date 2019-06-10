@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'pageLink',
+  name: 'PageLink',
   props: {
     path: {
       type: String,

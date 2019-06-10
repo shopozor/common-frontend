@@ -1,5 +1,5 @@
 import PasswordWithValidation from '../PasswordWithValidation'
-import { mountQuasar } from '../../../../../test/jest/utils'
+import { mountQuasar } from '../../../../unit-tests/utils'
 import vuelidate from '../../../../../src/boot/vuelidate'
 import { passwords } from '../passwordPolicy'
 
