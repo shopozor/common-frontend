@@ -22,7 +22,7 @@ export function login (persona) {
       // TODO: instead of the above code, we need something like
       // // TODO: I will probably need to import the action directly and provide it with the commit method
       // let stayLoggedIn = true
-      // // // TODO: use the const defined in /src/types/links.js
+      // // // TODO: use the const defined in /types/links.js
       // email = user.email
       // password = user.password
       // store.dispatch('login', { email, password, stayLoggedIn })

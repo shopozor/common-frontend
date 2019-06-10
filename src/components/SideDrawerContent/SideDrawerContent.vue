@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import types from '../../types'
+import types from '../../../types'
 import { filterAccessibleLinks, generatePath } from '../../router/Helpers'
 import PageLink from './PageLink'
 
