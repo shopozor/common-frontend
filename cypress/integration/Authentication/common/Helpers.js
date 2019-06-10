@@ -1,9 +1,7 @@
 const jwtDecode = require('jwt-decode')
 import { duration } from 'moment'
 
-import { injectResponseFixtureIfFaked } from '../../common/fakeServer'
-
-import types from '../../../../types'
+import types from '../../../../src/types'
 
 // import store from '../../../../src/store/index'
 
@@ -14,7 +12,6 @@ export function getTokenCookie () {
 export function login (persona) {
   // TODO: the following code needs to be replaced with a programmatic login
   // i.e. a direct call to store.dispatch('login', { email, password, stayLoggedIn }):
-  injectResponseFixtureIfFaked(`Authentication/LogStaffIn/Responses/${persona}`)
   cy.visit('/login')
   cy.fixture(`Authentication/Credentials/${persona}`)
     .then(user => {
