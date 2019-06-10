@@ -1,7 +1,7 @@
 const jwtDecode = require('jwt-decode')
 import { duration } from 'moment'
 
-import types from '../../../../src/types'
+import types from '../../../../types'
 
 // import store from '../../../../src/store/index'
 
