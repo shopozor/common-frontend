@@ -1,5 +1,4 @@
 import types from '../../types'
-// import { firstUpperCase, atLeastOneMatch } from '../Helpers.js'
 import { atLeastOneMatch } from '../Helpers.js'
 
 /**
