@@ -95,6 +95,10 @@ export default {
     invalidCredentials: 'Votre e-mail ou votre mot de passe est invalide.',
     userIsNotStaff: 'Vous n\'êtes pas enregistré comme administrateur.'
   },
+  logout: {
+    pending: 'Déconnection...',
+    success: 'Vous avez été correctement déconnecté.'
+  },
   layout: {
     notConnected: 'non connecté'
   },
