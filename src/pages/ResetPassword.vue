@@ -12,10 +12,12 @@
         @validity-check="isValid = $event" />
       <q-item class="row justify-center">
         <shaking-btn
+          id="cancel"
           :action="cancel">
           {{ $t('actions.cancel') }}
         </shaking-btn>
         <shaking-btn
+          id="submit"
           :disable="!isValid"
           :action="ok">
           {{ $t('actions.ok') }}
@@ -29,6 +31,7 @@
       </q-item>
       <q-item class="row justify-center">
         <shaking-btn
+          id="goBack"
           :action="cancel">
           {{ $t('actions.goBack') }}
         </shaking-btn>
@@ -38,8 +41,8 @@
 </template>
 
 <script>
-import emailWithValidation from './EmailWithValidation'
-import shakingBtn from './ShakingBtn'
+import emailWithValidation from '../components/form/EmailWithValidation'
+import shakingBtn from '../components/form/ShakingBtn'
 
 export default {
   name: 'ResetPassword',
@@ -58,7 +61,7 @@ export default {
         })
     },
     cancel () {
-      this.$router.push('/')
+      this.$router.back()
     }
   },
   components: { emailWithValidation, shakingBtn }
