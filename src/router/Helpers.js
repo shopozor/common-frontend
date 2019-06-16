@@ -3,11 +3,11 @@ import { atLeastOneMatch } from '../Helpers.js'
 
 /**
  * To add a new page:
- *  1) add its type to types/links.js.
+ *  1) add its type to common/types/links.js.
  *     It must match the component file name : ConfirmationEmailSent.js -> confirmationEmailSent)
- *  2) create link and access rules in router/links.js
+ *  2) create link and access rules in src/router/links.js
  *  3) If the page must be reachable from the burger menu,
- *     write its name in router/links.js > orderedLinks
+ *     write its name in src/router/links.js > orderedLinks
  **/
 
 export const generatePath = ({ link }) => {

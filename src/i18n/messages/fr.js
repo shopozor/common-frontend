@@ -12,7 +12,8 @@ export default {
     ok: 'Valider',
     cancel: 'Annuler',
     save: 'Enregistrer',
-    close: 'Fermer'
+    close: 'Fermer',
+    goBack: 'Retour'
   },
   links: {
     [types.links.SIGNUP]: 'S\'inscrire',
@@ -98,6 +99,12 @@ export default {
   logout: {
     pending: 'Déconnection...',
     success: 'Vous avez été correctement déconnecté.'
+  },
+  resetPassword: {
+    explain: 'Veuillez entrer votre nom de Budzon, afin que nous puissions vous envoyer un lien de réinitialisation du mot de passe.',
+    enterMail: 'Veuillez entrer votre e-mail',
+    invalidMail: 'Cet e-mail est invalide',
+    emailSent: 'Un lien de réinitialisation a été envoyé à l\'adresse indiquée. Cliquez sur ce lien pour entrer un nouveau mot de passe.'
   },
   layout: {
     notConnected: 'non connecté'
