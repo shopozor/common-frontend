@@ -7,11 +7,13 @@
           {{ $t('resetPassword.explain') }}
         </q-item>
         <password-with-validation
+          id="password"
           v-model="password.value"
           mandatory
           :errorMessage="$t('resetPassword.invalidPassword')"
           @validity-check="password.isValid = $event" />
         <password-with-validation
+          id="repeatPassword"
           v-model="repeatPassword.value"
           :repeatPassword="password.value"
           mandatory
@@ -72,7 +74,7 @@ import { generatePath } from '../router/Helpers'
 import types from '../../types'
 
 export default {
-  name: 'ForgotPassword',
+  name: 'ResetPassword',
   data () {
     return {
       password: {
@@ -99,7 +101,7 @@ export default {
         encodedId: this.$route.params.id,
         oneTimeToken: this.$route.params.token
       })
-        .then(() => {
+        .then(response => {
           this.state = 'success'
         })
         .catch(() => {
