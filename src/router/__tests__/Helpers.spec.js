@@ -6,7 +6,8 @@ describe('router helpers', () => {
     const cases = {
       dummyPath: '/dummyPath',
       [types.links.HOME]: '/',
-      [types.links.ACTIVATE]: '/activate/:id/:token'
+      [types.links.ACTIVATE]: '/activate/:id/:token',
+      [types.links.RESET_PASSWORD]: '/resetPassword/:id/:token'
     }
 
     Object.entries(cases).forEach(testCase => {

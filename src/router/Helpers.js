@@ -11,9 +11,17 @@ import { atLeastOneMatch } from '../Helpers.js'
  **/
 
 export const generatePath = ({ link }) => {
-  if (link === types.links.HOME) return '/'
-  else if (link === types.links.ACTIVATE) return '/activate/:id/:token'
-  else return `/${link}`
+  switch (link) {
+    case types.links.HOME:
+      return '/'
+
+    case types.links.ACTIVATE:
+    case types.links.RESET_PASSWORD:
+      return `/${link}/:id/:token`
+
+    default:
+      return `/${link}`
+  }
 }
 
 const checkIfLinkIsAccessible = ({ link, accessRules, permissions }) => {

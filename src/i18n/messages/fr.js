@@ -13,7 +13,8 @@ export default {
     cancel: 'Annuler',
     save: 'Enregistrer',
     close: 'Fermer',
-    goBack: 'Retour'
+    goBack: 'Retour',
+    connect: 'Se connecter'
   },
   links: {
     [types.links.SIGNUP]: 'S\'inscrire',
@@ -105,6 +106,14 @@ export default {
     enterMail: 'Veuillez entrer votre e-mail',
     invalidMail: 'Cet e-mail est invalide',
     emailSent: 'Un lien de réinitialisation a été envoyé à l\'adresse indiquée. Cliquez sur ce lien pour entrer un nouveau mot de passe.'
+  },
+  resetPassword: {
+    explain: 'Entrez votre nouveau mot de passe et répétez-le.',
+    invalidPassword: 'Ce mot de passe est invalide.',
+    differentPasswords: 'Les deux mots de passe ne correspondent pas.',
+    pending: 'Patientez pendant la requête...',
+    success: 'Votre mot de passe a été changé avec succès.',
+    errorLinkExpired: 'Cela n\'a pas fonctionné. Le lien utilisé a expiré.'
   },
   layout: {
     notConnected: 'non connecté'
