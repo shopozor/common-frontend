@@ -100,7 +100,7 @@ export default {
     pending: 'Déconnection...',
     success: 'Vous avez été correctement déconnecté.'
   },
-  resetPassword: {
+  forgotPassword: {
     explain: 'Veuillez entrer votre nom de Budzon, afin que nous puissions vous envoyer un lien de réinitialisation du mot de passe.',
     enterMail: 'Veuillez entrer votre e-mail',
     invalidMail: 'Cet e-mail est invalide',
