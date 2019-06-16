@@ -1,9 +1,9 @@
-import resetPassword from '../ResetPassword.vue'
+import forgotPassword from '../ForgotPassword.vue'
 import { mountQuasar } from '../../../unit-tests/utils'
 import vuelidate from '../../../../src/boot/vuelidate'
 
 describe('Reset password', () => {
-  const wrapper = mountQuasar(resetPassword, {
+  const wrapper = mountQuasar(forgotPassword, {
     boot: [vuelidate],
     store: {
       actions: {

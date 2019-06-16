@@ -45,7 +45,7 @@ import emailWithValidation from '../components/form/EmailWithValidation'
 import shakingBtn from '../components/form/ShakingBtn'
 
 export default {
-  name: 'ResetPassword',
+  name: 'ForgotPassword',
   data () {
     return {
       email: '',
