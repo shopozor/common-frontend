@@ -9,7 +9,7 @@ fi
 
 HOSTER_URL=$1
 APPID=$2
-PASSWORD=$3
+PASSWORD=$4
 SESSION=$(getSession $3 $4 ${HOSTER_URL})
 ENV_NAME=$5
 
