@@ -16,7 +16,10 @@ import sinon from 'sinon'
  * it resolves with response <responseValue2>
  *
  * store: {
-      actions: {
+    getters: {
+      getterName: value
+    },
+    actions: {
         actionName: [
           {
             args: {
@@ -44,7 +47,12 @@ function createState (state) {
 }
 
 function createGetters (getters) {
-  return getters
+  return Object.entries(getters).reduce((builtGetters, getter) => {
+    builtGetters[getter[0]] = () => {
+      return getter[1]
+    }
+    return builtGetters
+  }, {})
 }
 
 function createMutations (mutations) {

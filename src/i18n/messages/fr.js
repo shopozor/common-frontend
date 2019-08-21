@@ -12,7 +12,9 @@ export default {
     ok: 'Valider',
     cancel: 'Annuler',
     save: 'Enregistrer',
-    close: 'Fermer'
+    close: 'Fermer',
+    goBack: 'Retour',
+    connect: 'Se connecter'
   },
   links: {
     [types.links.SIGNUP]: 'S\'inscrire',
@@ -80,12 +82,38 @@ export default {
     emailSent: 'Un email avec un lien d\'activation vous a été transmis. Cliquez sur ce lien pour finaliser la création de votre compte.',
     correctErrors: 'Veuillez corriger les erreurs.'
   },
+  activate: {
+    pending: 'Votre compte est en train d\'être activé.',
+    success: 'Votre compte a été correctement activé.',
+    error: {
+      expiredLink: 'Votre compte n\'a pas pu être activé. Le lien a expiré.',
+      unknown: 'Votre compte n\'a pas pu être activé à cause d\'une erreur inconnue.'
+    }
+  },
   login: {
     stayLoggedIn: 'rester connecté',
     connect: 'se connecter',
     forgotPassword: 'J\'ai oublié mon mot de passe',
     invalidCredentials: 'Votre e-mail ou votre mot de passe est invalide.',
     userIsNotStaff: 'Vous n\'êtes pas enregistré comme administrateur.'
+  },
+  logout: {
+    pending: 'Déconnection...',
+    success: 'Vous avez été correctement déconnecté.'
+  },
+  forgotPassword: {
+    explain: 'Veuillez entrer votre nom de Budzon, afin que nous puissions vous envoyer un lien de réinitialisation du mot de passe.',
+    enterMail: 'Veuillez entrer votre e-mail',
+    invalidMail: 'Cet e-mail est invalide',
+    emailSent: 'Un lien de réinitialisation a été envoyé à l\'adresse indiquée. Cliquez sur ce lien pour entrer un nouveau mot de passe.'
+  },
+  resetPassword: {
+    explain: 'Entrez votre nouveau mot de passe et répétez-le.',
+    invalidPassword: 'Ce mot de passe est invalide.',
+    differentPasswords: 'Les deux mots de passe ne correspondent pas.',
+    pending: 'Patientez pendant la requête...',
+    success: 'Votre mot de passe a été changé avec succès.',
+    errorLinkExpired: 'Cela n\'a pas fonctionné. Le lien utilisé a expiré.'
   },
   layout: {
     notConnected: 'non connecté'
