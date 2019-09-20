@@ -10,10 +10,10 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-yarn.lock
 
 # Editor directories and files
 .idea
+.vscode
 *.suo
 *.ntvs*
 *.njsproj
@@ -25,6 +25,11 @@ generateDoc.txt
 # Cypress test results
 /cypress/screenshots
 /cypress/videos
+/junit-reports/
 
 # generated spec
 /specification/
+
+# unit tests
+/test/jest/coverage
+
