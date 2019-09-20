@@ -5,17 +5,14 @@
     "timeDeltaInMs": 10,
     "TAGS": "not @wip and not @not-e2e"
   },
-  "ignoreTestFiles": [
-    "*.js",
-    "*.gif"
-  ],
-  "integrationFolder": "cypress/e2e",
+  "integrationFolder": "cypress/integration",
   "projectId": "g6v5sw",
   "reporter": "junit",
   "reporterOptions": {
-    "mochaFile": "junit-reports/cypress-e2e-report.[hash].xml",
+    "mochaFile": "junit-reports/cypress-integration-report.[hash].xml",
     "toConsole": true
   },
+  "testFiles": "**/*.spec.js",
   "video": true,
   "videoUploadOnPasses": false
 }
