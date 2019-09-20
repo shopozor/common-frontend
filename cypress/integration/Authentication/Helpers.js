@@ -15,10 +15,7 @@ export function login (persona) {
   cy.visit('/login')
   cy.fixture(`Authentication/Credentials/${persona}`)
     .then(user => {
-      cy.get('input[type=email]').clear().type(user.email)
-      cy.get('input[type=password]').clear().type(user.password)
-      cy.get('[id="loginButton"]')
-        .click()
+      connectWithUserCredentialsViaGui(user.email, user.password)
       // TODO: instead of the above code, we need something like
       // // TODO: I will probably need to import the action directly and provide it with the commit method
       // let stayLoggedIn = true
