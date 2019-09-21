@@ -1,6 +1,6 @@
 import PasswordWithValidation from '../PasswordWithValidation'
 import { mountQuasar } from '../../../../unit-tests/utils'
-import vuelidate from '../../../../../src/boot/vuelidate'
+import vuelidate from '../../../boot/vuelidate'
 import { passwords } from '../passwordPolicy'
 
 describe('mocking vuelidate', () => {
