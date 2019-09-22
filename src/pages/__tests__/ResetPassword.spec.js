@@ -3,7 +3,6 @@ import { mountQuasar } from '../../../unit-tests/utils'
 import vuelidate from '../../boot/vuelidate'
 import types from '../../../types'
 import { generatePath } from '../../router/Helpers'
-import { denodeify } from 'q'
 
 describe('Reset password', () => {
   const valid = {

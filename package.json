@@ -75,5 +75,11 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 10"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint --fix && yarn test:unit",
+      "pre-push": "yarn lint --fix && yarn test:unit"
+    }
+  }
 }
