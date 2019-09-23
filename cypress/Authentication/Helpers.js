@@ -9,21 +9,18 @@ export function getTokenCookie () {
   return cy.getCookie(types.cookies.TOKEN)
 }
 
-export function login (persona) {
+export function login (email, password) {
   // TODO: the following code needs to be replaced with a programmatic login
   // i.e. a direct call to store.dispatch('login', { email, password, stayLoggedIn }):
   cy.visit('/login')
-  cy.fixture(`Authentication/Credentials/${persona}`)
-    .then(user => {
-      connectWithUserCredentialsViaGui(user.email, user.password)
-      // TODO: instead of the above code, we need something like
-      // // TODO: I will probably need to import the action directly and provide it with the commit method
-      // let stayLoggedIn = true
-      // // // TODO: use the const defined in /types/links.js
-      // email = user.email
-      // password = user.password
-      // store.dispatch('login', { email, password, stayLoggedIn })
-    })
+  connectWithUserCredentialsViaGui(email, password)
+  // TODO: instead of the above code, we need something like
+  // // TODO: I will probably need to import the action directly and provide it with the commit method
+  // let stayLoggedIn = true
+  // // // TODO: use the const defined in /types/links.js
+  // email = user.email
+  // password = user.password
+  // store.dispatch('login', { email, password, stayLoggedIn })
 
   cy.get('@graphql').then(() => {
     getTokenCookie().then(token => {
