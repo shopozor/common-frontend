@@ -1,6 +1,8 @@
-import { UnsupportedDurationUnit } from './Exceptions'
-
 import { duration } from 'moment'
+
+function UnsupportedDurationUnit(message) {
+  this.message = message
+}
 
 const frToEnDurationUnit = fr => {
   if (fr.match(/^jours?$/)) {
