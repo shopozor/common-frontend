@@ -42,7 +42,7 @@ export const passwords = {
   //   password: 'M1551ngSpecialCaracter',
   //   isValid: false
   // },
-  'correct': {
+  correct: {
     password: 'Corr3ct!',
     isValid: true
   }
