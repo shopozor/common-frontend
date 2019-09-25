@@ -22,4 +22,18 @@ export default class TokenHandler {
       return Promise.resolve(cookie.value)
     })
   }
+
+  isTokenRemoved () {
+    if (this.elapsedTimeInMs > this.TIMEOUT_IN_MS) {
+      return Promise.reject(new Error('Awaiting token timeout'))
+    }
+    return getTokenCookie().then(cookie => {
+      if (cookie !== null) {
+        cy.wait(this.TIME_DELTA_IN_MS)
+        this.elapsedTimeInMs += this.TIME_DELTA_IN_MS
+        return this.isTokenRemoved()
+      }
+      return Promise.resolve(true)
+    })
+  }
 }
