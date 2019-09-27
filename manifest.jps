@@ -1,15 +1,16 @@
 jpsVersion: 1.3
 jpsType: install
 application:
-  id: FRONTEND_NAME
-  name: FRONTEND_NAME
+  id: APP_NAME
+  name: APP_NAME-IMAGE_TYPE
   version: 0.0
 
   env:
     topology:
       nodes:
-        - nodeGroup: cp
-          image: softozor/FRONTEND_NAME:latest
+        - image: softozor/APP_NAME
+          nodeGroup: cp
+          tag: IMAGE_TYPE-BRANCH
           displayName: Application servers
           count: 1
           fixedCloudlets: 4
