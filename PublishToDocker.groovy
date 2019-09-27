@@ -9,7 +9,7 @@ pipeline {
     stage('Build and publish docker image') {
       steps {
         script {
-          helpers.publishDockerImage(REPO, BRANCH, GRAPHQL_API, ENABLE_DEV_TOOLS, IMAGE_TYPE)
+          helpers.publishFrontendDockerImage(REPO, BRANCH, GRAPHQL_API, ENABLE_DEV_TOOLS, IMAGE_TYPE)
         }
       }
     }
