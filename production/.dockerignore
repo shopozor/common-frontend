@@ -1,0 +1,8 @@
+.github/
+.quasar/
+.git/
+.vscode/
+/cypress/
+/node_modules/
+/production/
+/scripts/
