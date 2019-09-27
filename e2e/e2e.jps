@@ -1,8 +1,8 @@
 jpsVersion: 1.3
 jpsType: update
 application:
-  id: FRONTEND_NAME
-  name: FRONTEND_NAME
+  id: APP_NAME
+  name: APP_NAME-IMAGE_TYPE
   version: 0.0
 
   globals:
