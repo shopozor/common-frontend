@@ -81,6 +81,12 @@
     "npm": ">= 5.6.0",
     "yarn": ">= 1.6.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint --fix",
+      "pre-push": "yarn lint --fix && yarn test:unit"
+    }
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
