@@ -1,6 +1,3 @@
-const jwtDecode = require('jwt-decode')
-import { duration } from 'moment'
-
 import types from '../../types'
 
 // import store from '../../../../src/store/index'
@@ -36,15 +33,11 @@ export function connectWithUserCredentialsViaGui (email, password) {
     .click()
 }
 
-export function getTokenDuration (token) {
-  const decodedToken = jwtDecode(token)
-  return duration(decodedToken.exp - decodedToken.origIat, 'seconds')
-}
-
 function openSideDrawer () {
   cy.get('[id=sideDrawer]').then(drawer => {
     const transform = drawer[0].style.transform
     const sideDrawerIsVisible = transform.includes('(0px)')
+    debugger
     if (!sideDrawerIsVisible) {
       cy.get('.burger-menu').click()
     }
