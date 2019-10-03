@@ -15,7 +15,7 @@
     "test:unit:watch": "jest --watch",
     "test:unit:watchAll": "jest --watchAll",
     "serve:test:coverage": "quasar serve test/jest/coverage/lcov-report/ --port 8788",
-    "test:unit:ui": "majestic"
+    "test:unit:ui": "majestic --port 6001"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
