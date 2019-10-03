@@ -35,9 +35,8 @@ export function connectWithUserCredentialsViaGui (email, password) {
 
 function openSideDrawer () {
   cy.get('[id=sideDrawer]').then(drawer => {
-    const transform = drawer[0].style.transform
-    const sideDrawerIsVisible = transform.includes('(0px)')
-    debugger
+    const transform = drawer.children()[0].style.transform
+    const sideDrawerIsVisible = transform.includes('translateX(0px)')
     if (!sideDrawerIsVisible) {
       cy.get('.burger-menu').click()
     }

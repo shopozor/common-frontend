@@ -1,7 +1,7 @@
 <template>
   <q-btn
     class="q-ma-md"
-    :class="{'animated shake': isShaking}"
+    :class="{'animated shake': isShaking, enabled: !disable}"
     :color="disable ? 'ghost' : 'primary'"
     :unelevated="disable"
     :label="label"
