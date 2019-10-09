@@ -8,7 +8,7 @@ application:
   env:
     topology:
       nodes:
-        - image: softozor/APP_NAME
+        - image: softozor/APP_NAME:IMAGE_TYPE-BRANCH
           nodeGroup: cp
           tag: IMAGE_TYPE-BRANCH
           displayName: Application servers
