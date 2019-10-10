@@ -8,6 +8,15 @@ application:
   env:
     topology:
       nodes:
+        - nodeGroup: bl
+          nodeType: nginx-dockerized
+          tag: 1.14.2
+          displayName: Node balancing
+          count: 1
+          fixedCloudlets: 1
+          cloudlets: 4
+          env:
+            DOCKER_EXPOSED_PORT: 22,80,443
         - image: softozor/APP_NAME:IMAGE_TYPE-BRANCH
           nodeGroup: cp
           tag: IMAGE_TYPE-BRANCH
