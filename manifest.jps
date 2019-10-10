@@ -25,3 +25,13 @@ application:
           fixedCloudlets: 4
           cloudlets: 10
       skipNodeEmails: true
+
+  onInstall:
+    - if ("IMAGE_TYPE" == "e2e"):
+      # this allows to mount the tests results folder on jenkins node
+      - installNfsCommon
+
+  actions:
+    installNfsCommon:
+      - cmd [cp]:
+        - apt install -y nfs-common
