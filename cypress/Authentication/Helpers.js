@@ -58,7 +58,8 @@ export function navigateTo (label) {
 
 export function checkIfLinkIsActive (label) {
   openSideDrawer()
-  getPageLink(label).then(
-    link => link[0].classList.value
-  ).should('include', 'isActive')
+
+  getPageLink(label)
+    .first()
+    .should('have.class', 'isActive')
 }
