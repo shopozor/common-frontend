@@ -11,7 +11,7 @@ export default value => {
     hasLowerCase(value) &&
     hasUpperCase(value) &&
     hasDigit(value) &&
-    hasSpecialCharacter
+    hasSpecialCharacter(value)
   return isValid
 }
 
@@ -20,10 +20,6 @@ export default value => {
 export const passwords = {
   'too short': {
     password: '5oR!',
-    isValid: false
-  },
-  'too long': {
-    password: 'ThisPasswordIsReallyTooLong1234567890()=',
     isValid: false
   },
   'missing lower case': {
