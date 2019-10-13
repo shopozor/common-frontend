@@ -8,6 +8,6 @@ function getConfigurationByFile (file) {
 }
 
 exports.getConfiguration = function (config) {
-  const file = config.env.configFile || 'development'
+  const file = config.env.configFile || 'integration'
   return getConfigurationByFile(file)
 }

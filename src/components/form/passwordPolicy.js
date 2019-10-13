@@ -1,17 +1,17 @@
 import { minLength } from 'vuelidate/lib/validators'
 
 const hasLowerCase = value => /[a-z]/.test(value)
-// const hasUpperCase = value => /[A-Z]/.test(value)
-// const hasDigit = value => /[0-9]/.test(value)
-// const hasSpecialCharacter = value => /[ !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/.test(value)
+const hasUpperCase = value => /[A-Z]/.test(value)
+const hasDigit = value => /[0-9]/.test(value)
+const hasSpecialCharacter = value => /[ !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/.test(value)
 
 export default value => {
   const isValid =
     minLength(8)(value) &&
-    hasLowerCase(value)// &&
-    // hasUpperCase(value) &&
-    // hasDigit(value) &&
-    // hasSpecialCharacter
+    hasLowerCase(value) &&
+    hasUpperCase(value) &&
+    hasDigit(value) &&
+    hasSpecialCharacter(value)
   return isValid
 }
 
@@ -22,27 +22,23 @@ export const passwords = {
     password: '5oR!',
     isValid: false
   },
-  // 'too long': {
-  //   password: 'ThisPasswordIsReallyTooLong1234567890()=',
-  //   isValid: false
-  // },
   'missing lower case': {
     password: 'M1551NG_LOWER_CASE',
     isValid: false
   },
-  // 'missing upper case': {
-  //   password: 'm!ssing_upp3r_case',
-  //   isValid: false
-  // },
-  // 'missing digit': {
-  //   password: 'Miss!ng-D!g!t',
-  //   isValid: false
-  // },
-  // 'missing special character': {
-  //   password: 'M1551ngSpecialCaracter',
-  //   isValid: false
-  // },
-  'correct': {
+  'missing upper case': {
+    password: 'm!ssing_upp3r_case',
+    isValid: false
+  },
+  'missing digit': {
+    password: 'Miss!ng-D!g!t',
+    isValid: false
+  },
+  'missing special character': {
+    password: 'M1551ngSpecialCaracter',
+    isValid: false
+  },
+  correct: {
     password: 'Corr3ct!',
     isValid: true
   }

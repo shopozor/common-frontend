@@ -1,0 +1,79 @@
+def helpers = new ch.softozor.pipeline.Helpers()
+
+pipeline {
+  agent any
+  environment {
+    APP_NAME = "shopozor-$REPO"
+    ENABLE_DEV_TOOLS = true
+    IMAGE_TYPE = "production"
+    JELASTIC_APP_CREDENTIALS = credentials('jelastic-app-credentials')
+    JELASTIC_CREDENTIALS = credentials('jelastic-credentials')
+    PRODUCTION_ENV_NAME = APP_NAME
+    STAGING_ENV_NAME = "${APP_NAME}-staging"
+  }
+  stages {
+    stage('Publish staging docker container') {
+      steps {
+        script {
+          helpers.publishFrontendDockerImage(APP_NAME, STAGING_BRANCH, GRAPHQL_API, ENABLE_DEV_TOOLS, IMAGE_TYPE)
+        }
+      }
+    }
+    stage('Deploy staging environment') {
+      steps {
+        script {
+          jps = "common/manifest.jps"
+          helpers.deploy(jps, APP_NAME, STAGING_ENV_NAME, STAGING_BRANCH, IMAGE_TYPE)
+        }
+      }
+    }
+    stage('Check staging environment') {
+      steps {
+        build job: 'security', parameters: [
+          string(name: 'HIDORA_DOMAIN', value: STAGING_ENV_NAME),
+          string(name: 'APPLICATION_TYPE', value: 'frontend')
+        ]
+      }
+    }
+    stage('Stop staging environment') {
+      steps {
+        script {
+          helpers.stopEnvironment(STAGING_ENV_NAME)
+        }
+      }
+    }
+    stage('Tag staging version') {
+      environment {
+        GITHUB_CREDENTIALS = credentials('github-credentials')
+      }
+      steps {
+        script {
+          helpers.tagAndPush(TAG, DESCRIPTION)
+        }
+      }
+    }
+    stage('Publish production docker container') {
+      steps {
+        script {
+          helpers.publishFrontendDockerImage(APP_NAME, TAG, GRAPHQL_API, ENABLE_DEV_TOOLS, IMAGE_TYPE)
+        }
+      }
+    }
+    stage('Deploy production environment') {
+      steps {
+        script {
+          jps = "common/manifest.jps"
+          helpers.deploy(jps, APP_NAME, PRODUCTION_ENV_NAME, TAG, IMAGE_TYPE)
+        }
+      }
+    }
+    stage('Check production environment') {
+      steps {
+        build job: 'security', parameters: [
+          string(name: 'HIDORA_DOMAIN', value: PRODUCTION_ENV_NAME),
+          string(name: 'APPLICATION_TYPE', value: 'frontend')
+        ]
+      }
+    }
+  }
+}

@@ -12,12 +12,16 @@ describe('FillHeight mixin', () => {
 
   it('has a setFillHeight method that sets the value of fillHeight data to window height minus header height and footer height', () => {
     const getElements = sinon.stub(document, 'getElementsByClassName')
-    getElements.withArgs('q-header').returns({ item: () => {
-      return { scrollHeight: headerHeight }
-    }})
-    getElements.withArgs('q-footer').returns({ item: () => {
-      return { scrollHeight: footerHeight }
-    }})
+    getElements.withArgs('q-header').returns({
+      item: () => {
+        return { scrollHeight: headerHeight }
+      }
+    })
+    getElements.withArgs('q-footer').returns({
+      item: () => {
+        return { scrollHeight: footerHeight }
+      }
+    })
 
     window.innerHeight = windowHeight
 

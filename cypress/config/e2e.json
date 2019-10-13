@@ -1,20 +1,23 @@
 {
+  "env": {
+    "timeoutInMs": 1000,
+    "timeDeltaInMs": 10,
+    "TAGS": "not @wip"
+  },
+  "fixturesFolder": "cypress/fixtures",
   "ignoreTestFiles": [
     "*.js",
     "*.gif"
   ],
-  "env": {
-    "fakeGraphql": false,
-    "timeoutInMs": 1000,
-    "timeDeltaInMs": 10,
-    "TAGS": "not @wip and not @not-e2e"
-  },
+  "integrationFolder": "cypress/e2e",
+  "projectId": "g6v5sw",
   "reporter": "junit",
   "reporterOptions": {
-    "mochaFile": "junit-reports/cypress-report.[hash].xml",
+    "mochaFile": "junit-reports/cypress-e2e-report.[hash].xml",
     "toConsole": true
   },
-  "videoUploadOnPasses": false,
   "video": true,
-  "projectId": "g6v5sw"
+  "videoUploadOnPasses": false,
+  "viewportWidth": 1440,
+  "viewportHeight": 900
 }

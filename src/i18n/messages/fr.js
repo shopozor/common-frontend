@@ -80,7 +80,8 @@ export default {
     },
     creatingAccount: 'Veuillez patienter pendant que votre compte utilisateur est créé.',
     emailSent: 'Un email avec un lien d\'activation vous a été transmis. Cliquez sur ce lien pour finaliser la création de votre compte.',
-    correctErrors: 'Veuillez corriger les erreurs.'
+    correctErrors: 'Veuillez corriger les erreurs.',
+    error: 'Une erreur inconnue est survenue. Arrêtez d\'essayer de nous hacker!'
   },
   activate: {
     pending: 'Votre compte est en train d\'être activé.',
