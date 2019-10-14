@@ -19,7 +19,6 @@ application:
             DOCKER_EXPOSED_PORT: 22,80,443
         - image: softozor/APP_NAME:IMAGE_TYPE-BRANCH
           nodeGroup: cp
-          tag: IMAGE_TYPE-BRANCH
           displayName: Application servers
           count: 1
           fixedCloudlets: 4
