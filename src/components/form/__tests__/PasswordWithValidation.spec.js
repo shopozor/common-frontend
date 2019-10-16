@@ -66,9 +66,9 @@ describe('using vuelidate', () => {
 
   it('detects an error iif the value does not follow password policy and "repeatPassword" prop is false or unset', () => {
     const testPolicy = () => {
-      Object.keys(passwords).forEach(description => {
-        const password = passwords[description].password
-        const isValid = passwords[description].isValid
+      Object.keys(passwords).forEach(passwordCase => {
+        const password = passwords[passwordCase].password
+        const isValid = passwords[passwordCase].isValid
         wrapper.setProps({ ...wrapper.props(), value: password })
         expect(wrapper.vm.$v.value.$invalid).toBe(!isValid)
       })
