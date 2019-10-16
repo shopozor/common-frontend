@@ -8,8 +8,7 @@ const hasSpecialCharacter = value => /[ !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/.test(
 export default value => {
   const isValid =
     minLength(8)(value) &&
-    hasLowerCase(value) &&
-    hasUpperCase(value) &&
+    (hasLowerCase(value) || hasUpperCase(value)) &&
     hasDigit(value) &&
     hasSpecialCharacter(value)
   return isValid
@@ -24,10 +23,14 @@ export const passwords = {
   },
   'missing lower case': {
     password: 'M1551NG_LOWER_CASE',
-    isValid: false
+    isValid: true
   },
   'missing upper case': {
     password: 'm!ssing_upp3r_case',
+    isValid: true
+  },
+  'missing letter': {
+    password: '^^1$$1^& [3]]3&',
     isValid: false
   },
   'missing digit': {
