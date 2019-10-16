@@ -62,8 +62,8 @@ export default {
     },
     password: {
       label: 'mot de passe',
-      hint: '6 caractères ou plus',
-      error: 'il manque 1 caractère | il manque {count} caractères'
+      hint: 'au moins 8 lettres, chiffres et caractères spéciaux',
+      error: 'mot de passe invalide'
     },
     confirmPassword: {
       label: 'répétez votre mot de passe',
